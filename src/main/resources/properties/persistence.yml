@@ -1,0 +1,40 @@
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: validate
+  flyway:
+    locations:
+      - classpath:db/migration
+      - classpath:db/migration/v1
+
+---
+
+spring:
+  config.activate.on-profile: 'local | dev | stage | prod'
+
+  datasource:
+    url: jdbc:postgresql://${app.db.host}/${app.db.name}
+    username: ${app.db.username}
+    password: ${app.db.password}
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: validate
+
+---
+
+spring:
+  config.activate.on-profile: 'local'
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+app.db:
+  host: localhost:5432
+  name: trade_point_db
+  username: tp_user
+  password: tp_password
