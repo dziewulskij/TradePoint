@@ -3,8 +3,9 @@ server.port: 8080
 spring:
   application:
     name: TradePoint
-  profiles.active: local
+  profiles.active: local, secure
   config:
     import:
       - classpath:properties/persistence.yml
       - classpath:properties/mail.yml
+      - classpath:properties/security.yml

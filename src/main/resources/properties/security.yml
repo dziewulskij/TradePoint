@@ -1,0 +1,56 @@
+app:
+  security:
+    privateKey: "-----BEGIN PRIVATE KEY-----
+                MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDB1kym8431JqQ2
+                cD2J6Xg8wifpGe2K8O7CJabfjGfdVjAc7we7KKshXhG3ldG8u8zVmbShr4dW8F+T
+                GL3viGXcz6QhdpIHZgJxHyDxoJ3NQ7lQGWGSgT/rynwpZsoBaGMshtMZprSL9oOx
+                T6zuPhcIhSf45Bora3N1+nyqYvEPvfm+FqCN4snjxrMwdQqqAhtByeLzOzZJE0/3
+                Q9irOnTeIJGA59k3zieiERMTO2W2jZDLIKeiiXSHxfr2/pCRck/K3s56o/tpJQim
+                NSrm/baABH4YRqbg6vw09G966mC75sMt38GABHEh3EseVy9b1VVfwY7AvMyV2l6D
+                T6RLMQObAgMBAAECggEAFJgjLr3DwF8ppUsJjsSKbNIoEWEa1t9ATspXT3sIcgC9
+                PeW7iYwJmpL3CO1XClldqvgYs/EFTRxe2y8OxwtT30EEbDW/0B9rdP9cra9l9LAU
+                WUlJD5rB4thxlqiAH+QqXUm51gjbN9+qIEWZ1vor0lDrbUs26JQTAV7qreOzPvu9
+                p4kjEiFUi1f8fLcNITGz8/i/4s4eND4ldwZUXk/SiqeAgnKNiJwcTbsxsEpXP86m
+                1lUkOVWPRNgbXVconBj4eSX54PsTSVtqV+8ylDnsFkCsbYRFIeo9QocQmoPnj2dP
+                xuc7FCL9SXDlpM2f5FNOY7Axmi+0KRhU+yjzrPMXQQKBgQD09Gtsgc79bRN7dgOu
+                fM9HgTYk9Inxb8OOV7c8fDiv42sMLz/SJcRSFGT2nlEpkDgD8JuE0il64vfHHeG6
+                a0bm27FDOHXjkqg1Qm7XORZFDmpgdAZv86DhpGQBrHkeLeel1qRT0qtlADkrHw6C
+                K4j+XrwFN2uAF3DcSrdx1QcbYQKBgQDKk9CI910MTQ/M0w5bBx2IzIAKe+qfiWgb
+                JD6UJSWMRN0vXMtJY9GMitwcn2pFME0k2AVRV4inFvxyOSAls2b8eI4XAbs6H9ik
+                DzGNwO4o5gLfiYiCSjg6q3b7cY2tWQ79pAkYxYAdI1vCcHnOiXwSgnPS6Cl3/r5J
+                qEEtuPBcewKBgQDAA70VoKfONqu38umt5L5jMeFslJhxPwgPU6kaa9HP5rhqI7um
+                kt5S7RO70pyStS+Dvx9ZvZiwcKyEVGM2y5MXso1AwUiALN1YaowSf/h6B3PRygGl
+                zleFqWSPf1CuHJPiht/nqVObZ9Jof/7SgSfxJffDKw9EqJtaw+MLA09/4QKBgBR/
+                Jj9lf+WpumqIBFDThHp97oqhBRlFRuJQJYDJzWXG5fZP1kXDssUcm67Ntmvvui57
+                KPaU+7+kRMCt5QHLiCUNcZsEUtRLupjG7MWh+rbqpunFOamtJslQ5gYE9EfQ1gJ1
+                4XG/MfpAxJ0E0l5CbOpWhq+VS/TXMpuzSXz91FwXAoGBAKgElkL8sq6kZnM1Sgzd
+                j7E16e8QE2HTfq4xi+09T7yquAnpN4uuGxoM08uZBsoQRMxbXNizLKxSoutgGoWD
+                4r1b/78LQgKEdw9roRSH3lSfmcPeeFWZx596Ikv8xen9HAcAQcHT0LzpZTN9KMyv
+                mvRu+N/brLCEmBCe4PPWUTJG
+                -----END PRIVATE KEY-----"
+
+    publicKey: "-----BEGIN PUBLIC KEY-----
+                MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAwdZMpvON9SakNnA9iel4
+                PMIn6RntivDuwiWm34xn3VYwHO8HuyirIV4Rt5XRvLvM1Zm0oa+HVvBfkxi974hl
+                3M+kIXaSB2YCcR8g8aCdzUO5UBlhkoE/68p8KWbKAWhjLIbTGaa0i/aDsU+s7j4X
+                CIUn+OQaK2tzdfp8qmLxD735vhagjeLJ48azMHUKqgIbQcni8zs2SRNP90PYqzp0
+                3iCRgOfZN84nohETEztlto2QyyCnool0h8X69v6QkXJPyt7OeqP7aSUIpjUq5v22
+                gAR+GEam4Or8NPRveupgu+bDLd/BgARxIdxLHlcvW9VVX8GOwLzMldpeg0+kSzED
+                mwIDAQAB
+                -----END PUBLIC KEY-----"
+
+    cors:
+      allowed:
+        origins:
+          - "*"
+        headers:
+          - Origin
+          - Content-Type
+          - Accept
+          - Authorization
+        methods:
+          - GET
+          - POST
+          - PUT
+          - DELETE
+          - OPTIONS
