@@ -10,7 +10,7 @@ spring:
 ---
 
 spring:
-  config.activate.on-profile: 'local | dev | stage | prod'
+  config.activate.on-profile: 'local | dev | prod'
 
   datasource:
     url: jdbc:postgresql://${app.db.host}/${app.db.name}
