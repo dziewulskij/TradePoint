@@ -3,7 +3,6 @@ package pl.dziewulskij.tradepoint.infrastructure.adapters.in.rest.user;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import pl.dziewulskij.tradepoint.application.user.port.in.RegisterUserCommand;
 import pl.dziewulskij.tradepoint.application.user.port.in.RegisterUserResult;
@@ -17,7 +16,6 @@ import pl.dziewulskij.tradepoint.infrastructure.annotations.InputAdapter;
 @RestController
 @RequestMapping("/api/users")
 @RequiredArgsConstructor
-@Validated
 public class UserController {
 
     private final RegisterUserUseCase registerUserUseCase;
