@@ -1,8 +1,8 @@
-package pl.dziewulskij.tradepoint.application.service;
+package pl.dziewulskij.tradepoint.application.notification;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import pl.dziewulskij.tradepoint.application.port.MailSender;
+import pl.dziewulskij.tradepoint.application.notification.port.out.MailSender;
 
 @Component
 @RequiredArgsConstructor
@@ -11,7 +11,6 @@ public class SignUpNotificationService {
     private final MailSender mailSender;
 
     public void sendNotification(String recipient) {
-        mailSender.send("Subject1", recipient, "contenthtml");
     }
 
 }

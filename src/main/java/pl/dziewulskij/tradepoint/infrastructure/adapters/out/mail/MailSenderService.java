@@ -1,4 +1,4 @@
-package pl.dziewulskij.tradepoint.infrastructure.mail;
+package pl.dziewulskij.tradepoint.infrastructure.adapters.out.mail;
 
 import io.vavr.control.Try;
 import lombok.RequiredArgsConstructor;
@@ -6,7 +6,7 @@ import lombok.SneakyThrows;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
-import pl.dziewulskij.tradepoint.application.port.MailSender;
+import pl.dziewulskij.tradepoint.application.notification.port.out.MailSender;
 
 @Service
 @RequiredArgsConstructor
@@ -20,7 +20,7 @@ public class MailSenderService implements MailSender {
     }
 
     @SneakyThrows
-    private void trySend(String subject, String recipient, String htmlContent)  {
+    private void trySend(String subject, String recipient, String htmlContent) {
         var message = javaMailSender.createMimeMessage();
         var messageHelper = new MimeMessageHelper(message, true);
 
