@@ -1,4 +1,4 @@
-package pl.dziewulskij.tradepoint.infrastructure.mail;
+package pl.dziewulskij.tradepoint.infrastructure.adapters.out.mail;
 
 public class EmailSendingException extends RuntimeException {
 
