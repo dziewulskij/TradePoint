@@ -1,0 +1,14 @@
+spring:
+  config.activate.on-profile: 'local | dev | prod'
+  mail:
+    username: agricura.app@gmail.com
+    properties.mail.smtp.starttls.required: true
+    host: smtp.gmail.com
+    port: 587
+    password: htfs ylqy xkfy nmve
+    properties:
+      mail:
+        smtp:
+          auth: true
+          transport.protocol: smtp
+          starttls.enable: true
