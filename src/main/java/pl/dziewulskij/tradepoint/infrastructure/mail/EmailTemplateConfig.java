@@ -1,15 +1,28 @@
 package pl.dziewulskij.tradepoint.infrastructure.mail;
 
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import lombok.Data;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.Configuration;
 
-@Getter
-@RequiredArgsConstructor
-public enum EmailTemplateConfig {
+import java.util.Map;
 
-    USER_CREATED("templates/mail/registration_email.html", "Witamy w TradePoint!");
+@Data
+@Configuration
+@ConfigurationProperties(prefix = "app.mail.template")
+public class EmailTemplateConfig {
 
-    private final String path;
-    private final String subject;
+    private Map<EmailType, EmailTemplateData> config;
+
+    public Map<EmailType, EmailTemplateData> getTemplates() {
+        return config;
+    }
+
+    @Data
+    public static class EmailTemplateData {
+
+        private String path;
+        private String subject;
+
+    }
 
 }
