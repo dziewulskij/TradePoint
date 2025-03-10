@@ -34,11 +34,7 @@ public class MailSenderService implements MailSender {
         }
 
         String content = EmailTemplateLoader.load(emailTemplateData.getPath());
-        Try.run(() -> trySend(
-                        emailTemplateData.getSubject(),
-                        recipient.value(),
-                        content
-                ))
+        Try.run(() -> trySend(emailTemplateData.getSubject(), recipient.value(), content))
                 .getOrElseThrow(EmailSendingException::new);
     }
 
