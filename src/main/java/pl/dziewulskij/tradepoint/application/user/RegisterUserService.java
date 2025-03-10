@@ -1,6 +1,7 @@
 package pl.dziewulskij.tradepoint.application.user;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,6 +12,7 @@ import pl.dziewulskij.tradepoint.application.user.port.out.UserRepository;
 import pl.dziewulskij.tradepoint.domain.shared.Email;
 import pl.dziewulskij.tradepoint.domain.shared.Password;
 import pl.dziewulskij.tradepoint.domain.user.User;
+import pl.dziewulskij.tradepoint.domain.user.UserCreatedEvent;
 import pl.dziewulskij.tradepoint.infrastructure.annotations.InputPortImpl;
 
 @InputPortImpl
@@ -21,6 +23,7 @@ public class RegisterUserService implements RegisterUserUseCase {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final RegisterUserValidator validator;
+    private final ApplicationEventPublisher eventPublisher;
 
     @Override
     @Transactional
@@ -29,6 +32,7 @@ public class RegisterUserService implements RegisterUserUseCase {
         Password encodedPassword = encodePassword(command.password());
         User user = RegisterUserMapper.toEntity(command, encodedPassword);
         userRepository.save(user);
+        eventPublisher.publishEvent(new UserCreatedEvent(new Email(user.getEmail())));
         return RegisterUserMapper.toResponse(user);
     }
 

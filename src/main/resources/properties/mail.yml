@@ -12,3 +12,11 @@ spring:
           auth: true
           transport.protocol: smtp
           starttls.enable: true
+
+#app:
+#  mail:
+#    template:
+#      config:
+#        USER_CREATED:
+#          path: "templates/mail/registration_email.html"
+#          subject: "Witamy w TradePoint!"
