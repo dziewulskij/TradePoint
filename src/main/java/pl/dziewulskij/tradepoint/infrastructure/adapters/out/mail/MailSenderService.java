@@ -7,6 +7,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 import pl.dziewulskij.tradepoint.application.notification.port.out.MailSender;
+import pl.dziewulskij.tradepoint.infrastructure.mail.EmailTemplateLoader;
 
 @Service
 @RequiredArgsConstructor
@@ -16,6 +17,16 @@ public class MailSenderService implements MailSender {
 
     public void send(String subject, String recipient, String htmlContent) {
         Try.run(() -> trySend(subject, recipient, htmlContent))
+                .getOrElseThrow(EmailSendingException::new);
+    }
+
+    public void send(MailSenderData mailSenderData) {
+        String content = EmailTemplateLoader.load(mailSenderData.emailTemplateConfig().getPath());
+        Try.run(() -> trySend(
+                        mailSenderData.emailTemplateConfig().getSubject(),
+                        mailSenderData.recipient().value(),
+                        content
+                ))
                 .getOrElseThrow(EmailSendingException::new);
     }
 
