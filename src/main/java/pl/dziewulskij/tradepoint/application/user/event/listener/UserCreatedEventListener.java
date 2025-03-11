@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.context.event.EventListener;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
-import pl.dziewulskij.tradepoint.application.notification.port.out.MailSender;
+import pl.dziewulskij.tradepoint.application.port.out.MailSender;
 import pl.dziewulskij.tradepoint.domain.user.UserCreatedEvent;
 import pl.dziewulskij.tradepoint.infrastructure.mail.EmailType;
 

@@ -2,8 +2,8 @@ package pl.dziewulskij.tradepoint.infrastructure.adapters.in.rest.user;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
-import pl.dziewulskij.tradepoint.application.user.port.in.RegisterUserCommand;
-import pl.dziewulskij.tradepoint.application.user.port.in.RegisterUserResult;
+import pl.dziewulskij.tradepoint.application.port.in.user.RegisterUserCommand;
+import pl.dziewulskij.tradepoint.application.port.in.user.RegisterUserResult;
 import pl.dziewulskij.tradepoint.infrastructure.adapters.in.rest.user.dto.RegisterUserRequest;
 import pl.dziewulskij.tradepoint.infrastructure.adapters.in.rest.user.dto.RegisterUserResponse;
 

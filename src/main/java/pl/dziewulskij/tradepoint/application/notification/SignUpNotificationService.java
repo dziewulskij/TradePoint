@@ -2,7 +2,7 @@ package pl.dziewulskij.tradepoint.application.notification;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import pl.dziewulskij.tradepoint.application.notification.port.out.MailSender;
+import pl.dziewulskij.tradepoint.application.port.out.MailSender;
 
 @Component
 @RequiredArgsConstructor

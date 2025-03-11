@@ -20,3 +20,6 @@ app:
         USER_CREATED:
           path: "templates/mail/registration_email.html"
           subject: "Witamy w TradePoint!"
+        PASSWORD_RESET_REQUEST:
+          path: "templates/mail/password_reset_request_email.html"
+          subject: "Resetowanie hasła"

@@ -19,6 +19,7 @@
         <lombok.version>1.18.30</lombok.version>
         <vavr.version>0.10.6</vavr.version>
         <jjwt.version>0.12.6</jjwt.version>
+        <commons-text.version>1.13.0</commons-text.version>
     </properties>
 
     <dependencies>
@@ -75,6 +76,12 @@
             <artifactId>vavr</artifactId>
             <version>${vavr.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-text</artifactId>
+            <version>${commons-text.version}</version>
+        </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>

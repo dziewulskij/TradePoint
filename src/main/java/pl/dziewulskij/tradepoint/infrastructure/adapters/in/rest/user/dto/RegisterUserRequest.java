@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
-import pl.dziewulskij.tradepoint.infrastructure.adapters.in.rest.user.validation.ValidPassword;
+import pl.dziewulskij.tradepoint.infrastructure.adapters.in.rest.share.validation.ValidPassword;
 
 public record RegisterUserRequest(
         @Email

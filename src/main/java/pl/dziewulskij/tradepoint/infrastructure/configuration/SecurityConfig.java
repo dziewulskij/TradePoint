@@ -41,6 +41,8 @@ public class SecurityConfig {
                                 .requestMatchers("/login/**").permitAll()
                                 .requestMatchers(HttpMethod.POST, "/api/users/register").permitAll()
                                 .requestMatchers(HttpMethod.POST, "/api/auth/login").permitAll()
+                                .requestMatchers(HttpMethod.POST, "/api/reset-passwords/requests").permitAll()
+                                .requestMatchers(HttpMethod.POST, "/api/reset-passwords/resets").permitAll()
                                 .anyRequest().authenticated()
                 )
                 .oauth2ResourceServer(configurer -> configurer
