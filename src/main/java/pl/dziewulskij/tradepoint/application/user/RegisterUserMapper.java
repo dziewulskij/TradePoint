@@ -1,8 +1,8 @@
 package pl.dziewulskij.tradepoint.application.user;
 
 import lombok.NonNull;
-import pl.dziewulskij.tradepoint.application.user.port.in.RegisterUserCommand;
-import pl.dziewulskij.tradepoint.application.user.port.in.RegisterUserResult;
+import pl.dziewulskij.tradepoint.application.port.in.user.RegisterUserCommand;
+import pl.dziewulskij.tradepoint.application.port.in.user.RegisterUserResult;
 import pl.dziewulskij.tradepoint.domain.shared.Password;
 import pl.dziewulskij.tradepoint.domain.user.User;
 

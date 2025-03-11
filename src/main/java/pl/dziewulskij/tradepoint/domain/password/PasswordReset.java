@@ -24,8 +24,9 @@ public class PasswordReset extends CreatedAtAuditable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
+    @Builder.Default
     @Column(name = "token", length = 100, unique = true, nullable = false)
-    UUID token;
+    UUID token = UUID.randomUUID();
 
     @Column(name = "expires_at", nullable = false)
     LocalDateTime expiresAt;
@@ -36,4 +37,14 @@ public class PasswordReset extends CreatedAtAuditable {
     @JoinColumn(name = "user_id", nullable = false)
     User user;
 
+    public boolean isExpired() {
+        return expiresAt.isBefore(LocalDateTime.now());
+    }
+
+    public static PasswordReset of(User user) {
+        return PasswordReset.builder()
+                .expiresAt(LocalDateTime.now().plusHours(1))
+                .user(user)
+                .build();
+    }
 }
