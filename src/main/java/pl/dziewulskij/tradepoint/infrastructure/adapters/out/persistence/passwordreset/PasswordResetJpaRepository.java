@@ -6,7 +6,7 @@ import pl.dziewulskij.tradepoint.domain.password.PasswordReset;
 import java.util.Optional;
 import java.util.UUID;
 
-public interface JpaPasswordResetRepository extends JpaRepository<PasswordReset, Long> {
+public interface PasswordResetJpaRepository extends JpaRepository<PasswordReset, Long> {
 
     Optional<PasswordReset> findByTokenAndUserEmail(UUID token, String email);
 

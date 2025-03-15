@@ -29,4 +29,8 @@ public class BusinessId {
         return this.value.toString();
     }
 
+    public static BusinessId fromString(@NonNull String value) {
+        return BusinessId.of(UUID.fromString(value));
+    }
+
 }

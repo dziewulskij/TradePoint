@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.context.event.EventListener;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
-import pl.dziewulskij.tradepoint.application.port.out.MailSender;
+import pl.dziewulskij.tradepoint.application.port.out.mail.MailSender;
 import pl.dziewulskij.tradepoint.domain.password.PasswordResetRequestEvent;
 import pl.dziewulskij.tradepoint.infrastructure.adapters.out.mail.MailParamName;
 import pl.dziewulskij.tradepoint.infrastructure.mail.EmailType;

@@ -8,8 +8,8 @@ import org.springframework.transaction.annotation.Transactional;
 import pl.dziewulskij.tradepoint.application.port.in.password.PasswordResetCommand;
 import pl.dziewulskij.tradepoint.application.port.in.password.PasswordResetRequestCommand;
 import pl.dziewulskij.tradepoint.application.port.in.password.PasswordResetUseCase;
-import pl.dziewulskij.tradepoint.application.port.out.PasswordResetPort;
-import pl.dziewulskij.tradepoint.application.user.UserQueryService;
+import pl.dziewulskij.tradepoint.application.port.out.password.PasswordResetPort;
+import pl.dziewulskij.tradepoint.application.user.UserProvider;
 import pl.dziewulskij.tradepoint.domain.exception.PasswordResetNotFoundException;
 import pl.dziewulskij.tradepoint.domain.password.PasswordReset;
 import pl.dziewulskij.tradepoint.domain.password.PasswordResetRequestEvent;
@@ -24,11 +24,11 @@ public class PasswordResetService implements PasswordResetUseCase {
     private final PasswordEncoder passwordEncoder;
     private final PasswordResetPort passwordResetPort;
     private final ApplicationEventPublisher eventPublisher;
-    private final UserQueryService userQueryService;
+    private final UserProvider userProvider;
 
     @Override
     public void request(PasswordResetRequestCommand command) {
-        User user = userQueryService.findByEmailOrThrow(command.email());
+        User user = userProvider.byEmail(command.email());
         PasswordReset passwordReset = passwordResetPort.save(PasswordReset.of(user));
         eventPublisher.publishEvent(new PasswordResetRequestEvent(command.email(), passwordReset.getToken()));
     }
@@ -40,7 +40,7 @@ public class PasswordResetService implements PasswordResetUseCase {
                 .filter(Predicate.not(PasswordReset::isExpired))
                 .orElseThrow(PasswordResetNotFoundException::new);
 
-        User user = userQueryService.findByEmailOrThrow(command.email());
+        User user = userProvider.byEmail(command.email());
         user.setPassword(passwordEncoder.encode(command.password()));
         passwordResetPort.deleteByToken(command.token());
     }

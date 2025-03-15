@@ -6,7 +6,7 @@ import lombok.SneakyThrows;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
-import pl.dziewulskij.tradepoint.application.port.out.MailSender;
+import pl.dziewulskij.tradepoint.application.port.out.mail.MailSender;
 import pl.dziewulskij.tradepoint.domain.shared.Email;
 import pl.dziewulskij.tradepoint.infrastructure.mail.EmailTemplateConfig;
 import pl.dziewulskij.tradepoint.infrastructure.mail.EmailTemplateLoader;
