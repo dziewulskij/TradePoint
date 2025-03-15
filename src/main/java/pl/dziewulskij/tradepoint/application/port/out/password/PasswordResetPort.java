@@ -1,4 +1,4 @@
-package pl.dziewulskij.tradepoint.application.port.out;
+package pl.dziewulskij.tradepoint.application.port.out.password;
 
 import pl.dziewulskij.tradepoint.domain.password.PasswordReset;
 import pl.dziewulskij.tradepoint.domain.shared.Email;

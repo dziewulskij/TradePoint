@@ -2,7 +2,7 @@ package pl.dziewulskij.tradepoint.application.user;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import pl.dziewulskij.tradepoint.application.port.out.UserRepository;
+import pl.dziewulskij.tradepoint.application.port.out.user.ExistsUserPort;
 import pl.dziewulskij.tradepoint.domain.exception.UserAlreadyExistsException;
 import pl.dziewulskij.tradepoint.domain.shared.Email;
 
@@ -10,10 +10,10 @@ import pl.dziewulskij.tradepoint.domain.shared.Email;
 @RequiredArgsConstructor
 class RegisterUserValidator {
 
-    private final UserRepository userRepository;
+    private final ExistsUserPort existsUserPort;
 
     void validateUserUniqueness(Email email) {
-        if (userRepository.existsByEmail(email)) {
+        if (existsUserPort.existsByEmail(email)) {
             throw new UserAlreadyExistsException();
         }
     }

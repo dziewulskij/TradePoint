@@ -1,4 +1,4 @@
-package pl.dziewulskij.tradepoint.application.port.out;
+package pl.dziewulskij.tradepoint.application.port.out.mail;
 
 import pl.dziewulskij.tradepoint.domain.shared.Email;
 import pl.dziewulskij.tradepoint.infrastructure.annotations.OutputPort;

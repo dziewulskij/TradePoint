@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import pl.dziewulskij.tradepoint.application.port.in.auth.UserLoginCommand;
 import pl.dziewulskij.tradepoint.application.port.in.auth.UserLoginResult;
 import pl.dziewulskij.tradepoint.application.port.in.auth.UserLoginUseCase;
-import pl.dziewulskij.tradepoint.application.port.out.LoadUserPort;
+import pl.dziewulskij.tradepoint.application.port.out.user.LoadUserPort;
 import pl.dziewulskij.tradepoint.domain.shared.Email;
 import pl.dziewulskij.tradepoint.infrastructure.security.model.JwtCreationDetails;
 import pl.dziewulskij.tradepoint.infrastructure.security.provider.JwtTokenProvider;

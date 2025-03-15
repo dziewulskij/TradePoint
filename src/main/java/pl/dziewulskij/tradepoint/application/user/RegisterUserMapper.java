@@ -1,11 +1,13 @@
 package pl.dziewulskij.tradepoint.application.user;
 
 import lombok.NonNull;
+import lombok.experimental.UtilityClass;
 import pl.dziewulskij.tradepoint.application.port.in.user.RegisterUserCommand;
 import pl.dziewulskij.tradepoint.application.port.in.user.RegisterUserResult;
 import pl.dziewulskij.tradepoint.domain.shared.Password;
 import pl.dziewulskij.tradepoint.domain.user.User;
 
+@UtilityClass
 public class RegisterUserMapper {
 
     static User toEntity(@NonNull RegisterUserCommand command, @NonNull Password encodedPassword) {
