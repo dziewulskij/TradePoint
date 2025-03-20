@@ -1,19 +1,17 @@
 package pl.dziewulskij.tradepoint.application.customer;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Component;
 import pl.dziewulskij.tradepoint.application.port.out.customer.LoadCustomerPort;
-import pl.dziewulskij.tradepoint.domain.customer.CompanyCustomer;
+import pl.dziewulskij.tradepoint.domain.customer.Customer;
 import pl.dziewulskij.tradepoint.domain.exception.CustomerNotFoundException;
 import pl.dziewulskij.tradepoint.domain.shared.BusinessId;
 
-@Component
 @RequiredArgsConstructor
-public class CustomerProvider {
+public abstract class CustomerProvider<T extends Customer> {
 
-    private final LoadCustomerPort loadCustomerPort;
+    private final LoadCustomerPort<T> loadCustomerPort;
 
-    public CompanyCustomer byBusinessId(BusinessId customerId) {
+    public T byBusinessId(BusinessId customerId) {
         return loadCustomerPort.getById(customerId)
                 .orElseThrow(CustomerNotFoundException::new);
     }

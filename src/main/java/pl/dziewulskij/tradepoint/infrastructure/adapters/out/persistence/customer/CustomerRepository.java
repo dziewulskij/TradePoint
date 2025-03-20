@@ -4,32 +4,25 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 import pl.dziewulskij.tradepoint.application.port.out.customer.LoadCustomerPort;
 import pl.dziewulskij.tradepoint.application.port.out.customer.SaveCustomerPort;
-import pl.dziewulskij.tradepoint.domain.customer.CompanyCustomer;
+import pl.dziewulskij.tradepoint.domain.customer.Customer;
 import pl.dziewulskij.tradepoint.domain.shared.BusinessId;
 
-import java.util.List;
 import java.util.Optional;
 
 @Repository
 @RequiredArgsConstructor
-public class CustomerRepository implements SaveCustomerPort, LoadCustomerPort {
+public class CustomerRepository<T extends Customer> implements SaveCustomerPort<T>, LoadCustomerPort<T> {
 
-    private final CustomerJpaRepository customerJpaRepository;
-    private final CompanyCustomerJpaRepository companyCustomerJpaRepository;
-    private final PersonCustomerJpaRepository personCustomerJpaRepository;
+    private final CustomerJpaRepository<T> customerJpaRepository;
 
     @Override
-    public Optional<CompanyCustomer> getById(BusinessId customerId) {
-        return companyCustomerJpaRepository.findByBusinessId(customerId);
+    public Optional<T> getById(BusinessId customerId) {
+        return customerJpaRepository.findByBusinessId(customerId);
     }
 
     @Override
-    public List<CompanyCustomer> getAllByUserId(BusinessId userId) {
-        return companyCustomerJpaRepository.findByUserBusinessId(userId);
+    public void save(T customer) {
+        customerJpaRepository.save(customer);
     }
 
-    @Override
-    public void save(CompanyCustomer customer) {
-        companyCustomerJpaRepository.save(customer);
-    }
 }

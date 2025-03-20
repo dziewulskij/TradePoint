@@ -1,15 +1,14 @@
 package pl.dziewulskij.tradepoint.application.port.out.customer;
 
-import pl.dziewulskij.tradepoint.domain.customer.CompanyCustomer;
+import pl.dziewulskij.tradepoint.domain.customer.Customer;
 import pl.dziewulskij.tradepoint.domain.shared.BusinessId;
+import pl.dziewulskij.tradepoint.infrastructure.annotations.OutputPort;
 
-import java.util.List;
 import java.util.Optional;
 
-public interface LoadCustomerPort {
+@OutputPort
+public interface LoadCustomerPort<T extends Customer> {
 
-    Optional<CompanyCustomer> getById(BusinessId productId);
-
-    List<CompanyCustomer> getAllByUserId(BusinessId userId);
+    Optional<T> getById(BusinessId customerId);
 
 }

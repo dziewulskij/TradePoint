@@ -28,12 +28,12 @@ public class CompanyCustomer extends Customer {
     String taxId;
 
     public void update(CustomerCommand command) {
-        this.setEmail(command.email());
-        this.setPhone(command.phone());
-        this.setBankAccountNo(command.bankAccountNo());
-        this.setNotes(command.notes());
-        this.setCompanyName(command.companyName());
-        this.setCompanyShortName(command.companyShortName());
-        this.setTaxId(command.taxId());
+        super.email = command.email();
+        this.phone = command.phone();
+        this.bankAccountNo = command.bankAccountNo();
+        this.notes = command.notes();
+        this.companyName = command.companyName();
+        this.companyShortName = command.companyShortName();
+        this.taxId = command.taxId();
     }
 }

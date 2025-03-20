@@ -14,7 +14,7 @@ import pl.dziewulskij.tradepoint.domain.user.User;
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@FieldDefaults(level = AccessLevel.PRIVATE)
+@FieldDefaults(level = AccessLevel.PROTECTED)
 @Table(name = "CUSTOMER")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "customer_type", discriminatorType = DiscriminatorType.STRING)
@@ -47,5 +47,9 @@ public class Customer extends TimeAuditable {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     User user;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "customer_type", nullable = false, insertable = false, updatable = false)
+    CustomerType customerType;
 
 }

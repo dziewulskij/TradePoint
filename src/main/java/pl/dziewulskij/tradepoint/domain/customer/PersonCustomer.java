@@ -6,6 +6,7 @@ import jakarta.persistence.Entity;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import lombok.experimental.SuperBuilder;
+import pl.dziewulskij.tradepoint.application.port.in.customer.command.CustomerCommand;
 
 @Entity
 @DiscriminatorValue("PERSON")
@@ -25,5 +26,15 @@ public class PersonCustomer extends Customer {
 
     @Column(name = "pesel", length = 11)
     String pesel;
+
+    public void update(CustomerCommand command) {
+        super.email = command.email();
+        this.phone = command.phone();
+        this.bankAccountNo = command.bankAccountNo();
+        this.notes = command.notes();
+        this.firstName = command.firstName();
+        this.lastName = command.lastName();
+        this.pesel = command.pesel();
+    }
 
 }

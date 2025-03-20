@@ -4,9 +4,9 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import pl.dziewulskij.tradepoint.application.customer.CustomerCommandServiceDelegate;
 import pl.dziewulskij.tradepoint.application.port.in.customer.command.CommandCustomerResult;
 import pl.dziewulskij.tradepoint.application.port.in.customer.command.CustomerCommand;
-import pl.dziewulskij.tradepoint.application.port.in.customer.command.CustomerCommandUseCase;
 import pl.dziewulskij.tradepoint.application.port.in.customer.query.CustomerQueryUseCase;
 import pl.dziewulskij.tradepoint.application.port.in.customer.query.GetCustomerResult;
 import pl.dziewulskij.tradepoint.domain.shared.BusinessId;
@@ -24,7 +24,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class CustomerController {
 
-    private final CustomerCommandUseCase customerCommandUseCase;
+    private final CustomerCommandServiceDelegate customerCommandUseCase;
     private final CustomerQueryUseCase customerQueryUseCase;
     private final CustomerRestMapper customerRestMapper;
 
