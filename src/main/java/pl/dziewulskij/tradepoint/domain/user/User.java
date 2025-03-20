@@ -5,6 +5,7 @@ import lombok.*;
 import lombok.experimental.FieldDefaults;
 import org.hibernate.annotations.NaturalId;
 import pl.dziewulskij.tradepoint.domain.audit.TimeAuditable;
+import pl.dziewulskij.tradepoint.domain.customer.Customer;
 import pl.dziewulskij.tradepoint.domain.password.PasswordReset;
 import pl.dziewulskij.tradepoint.domain.product.Product;
 import pl.dziewulskij.tradepoint.domain.shared.BusinessId;
@@ -55,7 +56,10 @@ public class User extends TimeAuditable {
     @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
     Set<PasswordReset> passwordResets = new HashSet<>();
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "user")
     Set<Product> products = new HashSet<>();
+
+    @OneToMany(mappedBy = "user")
+    Set<Customer> customers = new HashSet<>();
 
 }

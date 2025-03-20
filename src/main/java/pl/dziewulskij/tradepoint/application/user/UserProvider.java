@@ -7,6 +7,7 @@ import pl.dziewulskij.tradepoint.domain.exception.UserNotFoundException;
 import pl.dziewulskij.tradepoint.domain.shared.BusinessId;
 import pl.dziewulskij.tradepoint.domain.shared.Email;
 import pl.dziewulskij.tradepoint.domain.user.User;
+import pl.dziewulskij.tradepoint.infrastructure.security.util.AuthenticationUtils;
 
 @Component
 @RequiredArgsConstructor
@@ -19,8 +20,9 @@ public class UserProvider {
                 .orElseThrow(UserNotFoundException::new);
     }
 
-    public User byBusinessId(BusinessId id) {
-        return loadUserPort.findByBusinessId(id)
+    public User currentUser() {
+        BusinessId currentUserId = AuthenticationUtils.getCurrentUserId();
+        return loadUserPort.findByBusinessId(currentUserId)
                 .orElseThrow(UserNotFoundException::new);
     }
 

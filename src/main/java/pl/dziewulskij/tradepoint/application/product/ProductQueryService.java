@@ -15,13 +15,14 @@ import java.util.List;
 public class ProductQueryService implements ProductQueryUseCase {
 
     private final LoadProductPort loadProductPort;
+    private final ProductMapper productMapper;
 
     @Override
     public List<GetProductResult> getAll() {
         BusinessId currentUserId = AuthenticationUtils.getCurrentUserId();
 
         return loadProductPort.findAllByUserId(currentUserId).stream()
-                .map(ProductMapper::toGetProductResult)
+                .map(productMapper::toGetProductResult)
                 .toList();
     }
 

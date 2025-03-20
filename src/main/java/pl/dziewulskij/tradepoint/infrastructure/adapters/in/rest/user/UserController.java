@@ -20,14 +20,15 @@ import pl.dziewulskij.tradepoint.infrastructure.annotations.InputAdapter;
 public class UserController {
 
     private final RegisterUserUseCase registerUserUseCase;
+    private final RegisterIUserApiMapper registerIUserApiMapper;
 
     @PostMapping("/register")
     @ResponseStatus(HttpStatus.CREATED)
     public RegisterUserResponse register(@RequestBody @Valid RegisterUserRequest request) {
         PasswordEqualValidator.validate(PasswordMatchData.from(request));
-        RegisterUserCommand command = RegisterUserRestMapper.toCommand(request);
+        RegisterUserCommand command = registerIUserApiMapper.toCommand(request);
         RegisterUserResult registerUserResult = registerUserUseCase.register(command);
-        return RegisterUserRestMapper.toResponse(registerUserResult);
+        return registerIUserApiMapper.toResponse(registerUserResult);
     }
 
 }

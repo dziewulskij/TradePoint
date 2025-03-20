@@ -21,28 +21,29 @@ public class ProductController {
 
     private final ProductCommandUseCase productCommandUseCase;
     private final ProductQueryUseCase productQueryUseCase;
+    private final ProductApiMapper productApiMapper;
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public CreateProductResponse create(@RequestBody @Valid CreateProductRequest request) {
-        CreateProductCommand createCommand = ProductRestMapper.toCreateCommand(request);
+        CreateProductCommand createCommand = productApiMapper.toCreateCommand(request);
         CreateProductResult createProductResult = productCommandUseCase.create(createCommand);
-        return ProductRestMapper.toResponse(createProductResult);
+        return productApiMapper.toResponse(createProductResult);
     }
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     public UpdateProductResponse update(@PathVariable UUID id, @RequestBody @Valid UpdateProductRequest request) {
-        UpdateProductCommand updateCommand = ProductRestMapper.toUpdateCommand(id, request);
+        UpdateProductCommand updateCommand = productApiMapper.toUpdateCommand(id, request);
         UpdateProductResult updateResult = productCommandUseCase.update(updateCommand);
-        return ProductRestMapper.toResponse(updateResult);
+        return productApiMapper.toResponse(updateResult);
     }
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public List<GetProductResponse> getAll() {
         List<GetProductResult> getProductResult = productQueryUseCase.getAll();
-        return ProductRestMapper.toResponseList(getProductResult);
+        return productApiMapper.toResponseList(getProductResult);
     }
 
 }
