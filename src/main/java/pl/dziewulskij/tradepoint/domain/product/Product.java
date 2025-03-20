@@ -3,6 +3,7 @@ package pl.dziewulskij.tradepoint.domain.product;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+import pl.dziewulskij.tradepoint.application.port.in.product.command.UpdateProductCommand;
 import pl.dziewulskij.tradepoint.domain.shared.BusinessId;
 import pl.dziewulskij.tradepoint.domain.user.User;
 
@@ -43,4 +44,8 @@ public class Product {
     @JoinColumn(name = "user_id", nullable = false)
     User user;
 
+    public void update(UpdateProductCommand command) {
+        this.setName(command.name());
+        this.setUnit(command.unit());
+    }
 }

@@ -16,7 +16,6 @@ import pl.dziewulskij.tradepoint.domain.user.User;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Table(name = "CUSTOMER")
-@ToString(onlyExplicitlyIncluded = true)
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "customer_type", discriminatorType = DiscriminatorType.STRING)
 public class Customer extends TimeAuditable {

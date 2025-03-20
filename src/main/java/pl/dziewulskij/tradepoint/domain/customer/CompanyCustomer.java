@@ -6,6 +6,7 @@ import jakarta.persistence.Entity;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import lombok.experimental.SuperBuilder;
+import pl.dziewulskij.tradepoint.application.port.in.customer.command.CustomerCommand;
 
 @Entity
 @DiscriminatorValue("COMPANY")
@@ -26,4 +27,13 @@ public class CompanyCustomer extends Customer {
     @Column(name = "tax_id", length = 10)
     String taxId;
 
+    public void update(CustomerCommand command) {
+        this.setEmail(command.email());
+        this.setPhone(command.phone());
+        this.setBankAccountNo(command.bankAccountNo());
+        this.setNotes(command.notes());
+        this.setCompanyName(command.companyName());
+        this.setCompanyShortName(command.companyShortName());
+        this.setTaxId(command.taxId());
+    }
 }
