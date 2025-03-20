@@ -15,10 +15,11 @@ import java.util.List;
 public class CustomerQueryService implements CustomerQueryUseCase {
 
     private final LoadCustomerPort loadCustomerPort;
+    private final CustomerMapper customerMapper;
 
     @Override
     public List<GetCustomerResult> getAll() {
         List<CompanyCustomer> customers = loadCustomerPort.getAllByUserId(AuthenticationUtils.getCurrentUserId());
-        return CustomerMapper.toResultList(customers);
+        return customerMapper.toResultList(customers);
     }
 }

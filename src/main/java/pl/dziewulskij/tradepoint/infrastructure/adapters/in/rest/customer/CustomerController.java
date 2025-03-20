@@ -26,28 +26,29 @@ public class CustomerController {
 
     private final CustomerCommandUseCase customerCommandUseCase;
     private final CustomerQueryUseCase customerQueryUseCase;
+    private final CustomerRestMapper customerRestMapper;
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public CustomerResponse create(@RequestBody @Valid CustomerRequest request) {
-        CustomerCommand createCommand = CustomerRestMapper.toCommand(request);
+        CustomerCommand createCommand = customerRestMapper.toCommand(request);
         CommandCustomerResult commandCustomerResult = customerCommandUseCase.create(createCommand);
-        return CustomerRestMapper.toResponse(commandCustomerResult);
+        return customerRestMapper.toResponse(commandCustomerResult);
     }
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     public CustomerResponse update(@PathVariable UUID id, @RequestBody @Valid CustomerRequest request) {
-        CustomerCommand updateCommand = CustomerRestMapper.toCommand(request);
+        CustomerCommand updateCommand = customerRestMapper.toCommand(request);
         CommandCustomerResult updateResult = customerCommandUseCase.update(BusinessId.of(id), updateCommand);
-        return CustomerRestMapper.toResponse(updateResult);
+        return customerRestMapper.toResponse(updateResult);
     }
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public List<GetCustomerResponse> getAll() {
         List<GetCustomerResult> getCustomerResults = customerQueryUseCase.getAll();
-        return CustomerRestMapper.toResponseList(getCustomerResults);
+        return customerRestMapper.toResponseList(getCustomerResults);
     }
 
 

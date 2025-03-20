@@ -1,21 +1,18 @@
 package pl.dziewulskij.tradepoint.infrastructure.adapters.in.rest.auth;
 
-import lombok.AccessLevel;
-import lombok.NoArgsConstructor;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import pl.dziewulskij.tradepoint.application.port.in.auth.UserLoginCommand;
 import pl.dziewulskij.tradepoint.application.port.in.auth.UserLoginResult;
 import pl.dziewulskij.tradepoint.infrastructure.adapters.in.rest.auth.dto.TokenResponse;
 import pl.dziewulskij.tradepoint.infrastructure.adapters.in.rest.auth.dto.UserLoginRequest;
 
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class AuthRestMapper {
+@Mapper
+public interface AuthApiMapper {
 
-    static UserLoginCommand toCommand(UserLoginRequest request) {
-        return new UserLoginCommand(request.email(), request.password());
-    }
+    UserLoginCommand toCommand(UserLoginRequest request);
 
-    static TokenResponse toResponse(UserLoginResult result) {
-        return new TokenResponse(result.token());
-    }
+    @Mapping(source = "token", target = "value")
+    TokenResponse toResponse(UserLoginResult result);
 
 }

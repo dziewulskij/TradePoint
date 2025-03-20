@@ -18,13 +18,14 @@ import pl.dziewulskij.tradepoint.infrastructure.annotations.InputAdapter;
 public class AuthController {
 
     private final UserLoginUseCase userLoginUseCase;
+    private final AuthApiMapper authApiMapper;
 
     @PostMapping("/login")
     @ResponseStatus(HttpStatus.OK)
     public TokenResponse login(@RequestBody @Valid UserLoginRequest request) {
-        UserLoginCommand command = AuthRestMapper.toCommand(request);
+        UserLoginCommand command = authApiMapper.toCommand(request);
         UserLoginResult userLoginResult = userLoginUseCase.login(command);
-        return AuthRestMapper.toResponse(userLoginResult);
+        return authApiMapper.toResponse(userLoginResult);
     }
 
 }

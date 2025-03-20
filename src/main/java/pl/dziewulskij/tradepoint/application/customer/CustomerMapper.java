@@ -1,61 +1,33 @@
 package pl.dziewulskij.tradepoint.application.customer;
 
-import lombok.experimental.UtilityClass;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import pl.dziewulskij.tradepoint.application.port.in.customer.command.CommandCustomerResult;
 import pl.dziewulskij.tradepoint.application.port.in.customer.command.CustomerCommand;
 import pl.dziewulskij.tradepoint.application.port.in.customer.query.GetCustomerResult;
 import pl.dziewulskij.tradepoint.domain.customer.CompanyCustomer;
+import pl.dziewulskij.tradepoint.domain.shared.BusinessId;
 import pl.dziewulskij.tradepoint.domain.user.User;
 
 import java.util.List;
-import java.util.stream.Stream;
 
-@UtilityClass
-public class CustomerMapper {
+@Mapper(imports = BusinessId.class)
+public interface CustomerMapper {
 
-    static CompanyCustomer toCreate(CustomerCommand command, User user) {
-        return CompanyCustomer.builder()
-                .companyName(command.companyName())
-                .companyShortName(command.companyShortName())
-                .taxId(command.taxId())
-                .email(command.email())
-                .phone(command.phone())
-                .bankAccountNo(command.bankAccountNo())
-                .notes(command.notes())
-                .user(user)
-                .build();
-    }
+    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "createdAt", ignore = true)
+    @Mapping(target = "lastModifiedAt", ignore = true)
+    @Mapping(target = "businessId", expression = "java(new BusinessId())")
+    @Mapping(source = "command.email", target = "email")
+    @Mapping(source = "command.phone", target = "phone")
+    @Mapping(source = "user", target = "user")
+    CompanyCustomer toCreate(CustomerCommand command, User user);
 
-    static CommandCustomerResult toResult(CompanyCustomer customer) {
-        return new CommandCustomerResult(
-                customer.getBusinessId().value(),
-                customer.getEmail(),
-                customer.getPhone(),
-                customer.getBankAccountNo(),
-                customer.getTaxId(),
-                customer.getNotes(),
-                customer.getCompanyName(),
-                customer.getCompanyShortName()
-        );
-    }
+    @Mapping(source = "businessId.value", target = "id")
+    CommandCustomerResult toResult(CompanyCustomer customer);
 
-    static List<GetCustomerResult> toResultList(List<CompanyCustomer> customers) {
-        return Stream.ofNullable(customers)
-                .flatMap(List::stream)
-                .map(CustomerMapper::toResultGet)
-                .toList();
-    }
+    @Mapping(source = "businessId.value", target = "id")
+    GetCustomerResult toResultGet(CompanyCustomer customer);
 
-    static GetCustomerResult toResultGet(CompanyCustomer customer) {
-        return new GetCustomerResult(
-                customer.getBusinessId().value(),
-                customer.getEmail(),
-                customer.getPhone(),
-                customer.getBankAccountNo(),
-                customer.getTaxId(),
-                customer.getNotes(),
-                customer.getCompanyName(),
-                customer.getCompanyShortName()
-        );
-    }
+    List<GetCustomerResult> toResultList(List<CompanyCustomer> customers);
 }

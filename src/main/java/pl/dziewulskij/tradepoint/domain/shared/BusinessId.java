@@ -2,16 +2,14 @@ package pl.dziewulskij.tradepoint.domain.shared;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NonNull;
+import lombok.*;
 import lombok.experimental.Accessors;
 
 import java.util.UUID;
 
+@Setter
 @Getter
-@Accessors(fluent = true)
+@Accessors
 @Embeddable
 @EqualsAndHashCode
 @AllArgsConstructor(staticName = "of")

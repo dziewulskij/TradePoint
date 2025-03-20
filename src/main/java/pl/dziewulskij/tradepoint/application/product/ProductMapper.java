@@ -1,34 +1,32 @@
 package pl.dziewulskij.tradepoint.application.product;
 
-import lombok.experimental.UtilityClass;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import pl.dziewulskij.tradepoint.application.port.in.product.command.CreateProductCommand;
 import pl.dziewulskij.tradepoint.application.port.in.product.command.CreateProductResult;
 import pl.dziewulskij.tradepoint.application.port.in.product.command.UpdateProductResult;
 import pl.dziewulskij.tradepoint.application.port.in.product.query.GetProductResult;
 import pl.dziewulskij.tradepoint.domain.product.Product;
+import pl.dziewulskij.tradepoint.domain.shared.BusinessId;
 import pl.dziewulskij.tradepoint.domain.user.User;
 
-@UtilityClass
-public class ProductMapper {
+@Mapper(imports = BusinessId.class)
+public interface ProductMapper {
 
-    static Product toCreate(CreateProductCommand command, User user) {
-        return Product.builder()
-                .name(command.name())
-                .unit(command.unit())
-                .user(user)
-                .build();
-    }
+    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "businessId", expression = "java(new BusinessId())")
+    @Mapping(source = "command.name", target = "name")
+    @Mapping(source = "command.unit", target = "unit")
+    @Mapping(source = "user", target = "user")
+    Product toCreate(CreateProductCommand command, User user);
 
-    static CreateProductResult toCreateResult(Product product) {
-        return new CreateProductResult(product.getBusinessId().value(), product.getName(), product.getUnit());
-    }
+    @Mapping(source = "businessId.value", target = "id")
+    CreateProductResult toCreateResult(Product product);
 
-    static UpdateProductResult toUpdateResult(Product product) {
-        return new UpdateProductResult(product.getBusinessId().value(), product.getName(), product.getUnit());
-    }
+    @Mapping(source = "businessId.value", target = "id")
+    UpdateProductResult toUpdateResult(Product product);
 
-    static GetProductResult toGetProductResult(Product product) {
-        return new GetProductResult(product.getBusinessId().value(), product.getName(), product.getUnit());
-    }
+    @Mapping(source = "businessId.value", target = "id")
+    GetProductResult toGetProductResult(Product product);
 
 }

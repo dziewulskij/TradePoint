@@ -16,15 +16,16 @@ public class ProductCommandService implements ProductCommandUseCase {
     private final SaveProductPort saveProductPort;
     private final ProductProvider productProvider;
     private final UserProvider userProvider;
+    private final ProductMapper productMapper;
     private final ProductNameUniquenessValidator productNameUniquenessValidator;
 
     @Override
     public CreateProductResult create(CreateProductCommand command) {
         productNameUniquenessValidator.validateForCreation(command.name());
         User user = userProvider.currentUser();
-        Product product = ProductMapper.toCreate(command, user);
+        Product product = productMapper.toCreate(command, user);
         saveProductPort.save(product);
-        return ProductMapper.toCreateResult(product);
+        return productMapper.toCreateResult(product);
     }
 
     @Override
@@ -34,7 +35,7 @@ public class ProductCommandService implements ProductCommandUseCase {
         productNameUniquenessValidator.validateForUpdate(command.name(), command.businessId());
         product.update(command);
         saveProductPort.save(product);
-        return ProductMapper.toUpdateResult(product);
+        return productMapper.toUpdateResult(product);
     }
 
 }

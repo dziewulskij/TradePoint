@@ -21,7 +21,7 @@ public class RegisterUserMapper {
 
     static RegisterUserResult toResponse(@NonNull User user) {
         return new RegisterUserResult(
-                user.getBusinessId().value(),
+                user.getBusinessId().getValue(),
                 user.getEmail()
         );
     }

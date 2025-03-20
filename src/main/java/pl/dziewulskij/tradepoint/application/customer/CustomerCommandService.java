@@ -18,13 +18,14 @@ public class CustomerCommandService implements CustomerCommandUseCase {
     private final SaveCustomerPort saveCustomerPort;
     private final CustomerProvider customerProvider;
     private final UserProvider userProvider;
+    private final CustomerMapper customerMapper;
 
     @Override
     public CommandCustomerResult create(CustomerCommand command) {
         User user = userProvider.currentUser();
-        CompanyCustomer customer = CustomerMapper.toCreate(command, user);
+        CompanyCustomer customer = customerMapper.toCreate(command, user);
         saveCustomerPort.save(customer);
-        return CustomerMapper.toResult(customer);
+        return customerMapper.toResult(customer);
     }
 
     @Override
@@ -32,7 +33,7 @@ public class CustomerCommandService implements CustomerCommandUseCase {
         CompanyCustomer customer = customerProvider.byBusinessId(id);
         customer.update(command);
         saveCustomerPort.save(customer);
-        return CustomerMapper.toResult(customer);
+        return customerMapper.toResult(customer);
     }
 
 }
