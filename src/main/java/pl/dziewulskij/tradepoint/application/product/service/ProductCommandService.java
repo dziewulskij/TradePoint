@@ -1,15 +1,18 @@
 package pl.dziewulskij.tradepoint.application.product.service;
 
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import pl.dziewulskij.tradepoint.application.port.in.product.command.*;
+import pl.dziewulskij.tradepoint.application.port.in.product.command.CreateProductCommand;
+import pl.dziewulskij.tradepoint.application.port.in.product.command.CreateProductResult;
+import pl.dziewulskij.tradepoint.application.port.in.product.command.ProductCommandUseCase;
+import pl.dziewulskij.tradepoint.application.port.out.product.DeleteProductPort;
 import pl.dziewulskij.tradepoint.application.port.out.product.SaveProductPort;
 import pl.dziewulskij.tradepoint.application.product.mapper.ProductMapper;
-import pl.dziewulskij.tradepoint.application.product.validator.ProductBelongToUserValidator;
-import pl.dziewulskij.tradepoint.application.product.validator.ProductNameUniquenessValidator;
+import pl.dziewulskij.tradepoint.application.product.validator.ProductCommandValidatorFacade;
 import pl.dziewulskij.tradepoint.application.user.UserProvider;
 import pl.dziewulskij.tradepoint.domain.product.Product;
+import pl.dziewulskij.tradepoint.domain.shared.BusinessId;
 import pl.dziewulskij.tradepoint.domain.user.User;
 
 @Service
@@ -17,15 +20,15 @@ import pl.dziewulskij.tradepoint.domain.user.User;
 public class ProductCommandService implements ProductCommandUseCase {
 
     private final SaveProductPort saveProductPort;
-    private final ProductProvider productProvider;
+    private final DeleteProductPort deleteProductPort;
     private final UserProvider userProvider;
     private final ProductMapper productMapper;
-    private final ProductNameUniquenessValidator productNameUniquenessValidator;
-    private final ProductBelongToUserValidator productBelongToUserValidator;
+    private final ProductCommandValidatorFacade productCommandValidatorFacade;
 
     @Override
+    @Transactional
     public CreateProductResult create(CreateProductCommand command) {
-        productNameUniquenessValidator.validateForCreation(command.name());
+        productCommandValidatorFacade.validateForCreation(command.name());
         User user = userProvider.currentUser();
         Product product = Product.create(command, user);
         saveProductPort.save(product);
@@ -34,13 +37,9 @@ public class ProductCommandService implements ProductCommandUseCase {
 
     @Override
     @Transactional
-    public UpdateProductResult update(UpdateProductCommand command) {
-        productBelongToUserValidator.validate(command.businessId());
-        Product product = productProvider.byBusinessId(command.businessId());
-        productNameUniquenessValidator.validateForUpdate(command.name(), command.businessId());
-        product.update(command);
-        saveProductPort.save(product);
-        return productMapper.toUpdateResult(product);
+    public void delete(BusinessId productId) {
+        productCommandValidatorFacade.validateForDeletion(productId);
+        deleteProductPort.deleteByBusinessId(productId);
     }
 
 }

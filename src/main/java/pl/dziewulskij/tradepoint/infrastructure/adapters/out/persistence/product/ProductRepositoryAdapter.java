@@ -2,20 +2,25 @@ package pl.dziewulskij.tradepoint.infrastructure.adapters.out.persistence.produc
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
-import pl.dziewulskij.tradepoint.application.port.out.product.LoadProductPort;
-import pl.dziewulskij.tradepoint.application.port.out.product.ProductExistencePort;
-import pl.dziewulskij.tradepoint.application.port.out.product.SaveProductPort;
+import pl.dziewulskij.tradepoint.application.port.out.product.*;
 import pl.dziewulskij.tradepoint.domain.product.Product;
 import pl.dziewulskij.tradepoint.domain.shared.BusinessId;
+import pl.dziewulskij.tradepoint.infrastructure.adapters.out.persistence.transaction.TransactionJpaRepository;
 
 import java.util.List;
 import java.util.Optional;
 
 @Repository
 @RequiredArgsConstructor
-public class ProductRepository implements SaveProductPort, LoadProductPort, ProductExistencePort {
+public class ProductRepositoryAdapter implements
+        SaveProductPort,
+        LoadProductPort,
+        ProductExistencePort,
+        DeleteProductPort,
+        ProductAttachedToTransactionPort {
 
     private final ProductJpaRepository productJpaRepository;
+    private final TransactionJpaRepository transactionJpaRepository;
 
     @Override
     public Product save(Product product) {
@@ -43,7 +48,12 @@ public class ProductRepository implements SaveProductPort, LoadProductPort, Prod
     }
 
     @Override
-    public boolean existsByNameAndUserIdExcludingProductId(String name, BusinessId userId, BusinessId productId) {
-        return productJpaRepository.existsByNameAndUserBusinessIdAndBusinessIdNot(name, userId, productId);
+    public void deleteByBusinessId(BusinessId productId) {
+        productJpaRepository.deleteByBusinessId(productId);
+    }
+
+    @Override
+    public boolean isProductAttachedToAnyTransaction(BusinessId productId) {
+        return transactionJpaRepository.existsByProductBusinessId(productId);
     }
 }

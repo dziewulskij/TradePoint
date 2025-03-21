@@ -4,10 +4,15 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import pl.dziewulskij.tradepoint.application.port.in.product.command.*;
+import pl.dziewulskij.tradepoint.application.port.in.product.command.CreateProductCommand;
+import pl.dziewulskij.tradepoint.application.port.in.product.command.CreateProductResult;
+import pl.dziewulskij.tradepoint.application.port.in.product.command.ProductCommandUseCase;
 import pl.dziewulskij.tradepoint.application.port.in.product.query.GetProductResult;
 import pl.dziewulskij.tradepoint.application.port.in.product.query.ProductQueryUseCase;
-import pl.dziewulskij.tradepoint.infrastructure.adapters.in.rest.product.dto.*;
+import pl.dziewulskij.tradepoint.domain.shared.BusinessId;
+import pl.dziewulskij.tradepoint.infrastructure.adapters.in.rest.product.dto.CreateProductRequest;
+import pl.dziewulskij.tradepoint.infrastructure.adapters.in.rest.product.dto.CreateProductResponse;
+import pl.dziewulskij.tradepoint.infrastructure.adapters.in.rest.product.dto.GetProductResponse;
 import pl.dziewulskij.tradepoint.infrastructure.annotations.InputAdapter;
 
 import java.util.List;
@@ -31,12 +36,10 @@ public class ProductController {
         return productApiMapper.toResponse(createProductResult);
     }
 
-    @PutMapping("/{id}")
-    @ResponseStatus(HttpStatus.OK)
-    public UpdateProductResponse update(@PathVariable UUID id, @RequestBody @Valid UpdateProductRequest request) {
-        UpdateProductCommand updateCommand = productApiMapper.toUpdateCommand(id, request);
-        UpdateProductResult updateResult = productCommandUseCase.update(updateCommand);
-        return productApiMapper.toResponse(updateResult);
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void delete(@PathVariable UUID id) {
+        productCommandUseCase.delete(BusinessId.of(id));
     }
 
     @GetMapping

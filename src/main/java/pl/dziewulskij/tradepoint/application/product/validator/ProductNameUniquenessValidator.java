@@ -21,12 +21,4 @@ public class ProductNameUniquenessValidator {
         }
     }
 
-    public void validateForUpdate(String productName, BusinessId productId) {
-        BusinessId currentUserId = AuthenticationUtils.getCurrentUserId();
-
-        if (productExistencePort.existsByNameAndUserIdExcludingProductId(productName, currentUserId, productId)) {
-            throw new ProductAlreadyExistsException();
-        }
-    }
-
 }

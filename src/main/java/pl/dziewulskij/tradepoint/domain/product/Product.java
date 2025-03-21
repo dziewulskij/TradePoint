@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import pl.dziewulskij.tradepoint.application.port.in.product.command.CreateProductCommand;
-import pl.dziewulskij.tradepoint.application.port.in.product.command.UpdateProductCommand;
 import pl.dziewulskij.tradepoint.domain.shared.BusinessId;
 import pl.dziewulskij.tradepoint.domain.transaction.Transaction;
 import pl.dziewulskij.tradepoint.domain.user.User;
@@ -63,8 +62,4 @@ public class Product {
                 .build();
     }
 
-    public void update(UpdateProductCommand command) {
-        this.setName(command.name());
-        this.setUnit(command.unit());
-    }
 }

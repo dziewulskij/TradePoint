@@ -4,7 +4,7 @@ import pl.dziewulskij.tradepoint.domain.shared.BusinessId;
 import pl.dziewulskij.tradepoint.infrastructure.annotations.OutputPort;
 
 @OutputPort
-public interface RemoveProductPricePort {
+public interface DeleteProductPricePort {
 
     void deleteByBusinessId(BusinessId productPriceId);
 
