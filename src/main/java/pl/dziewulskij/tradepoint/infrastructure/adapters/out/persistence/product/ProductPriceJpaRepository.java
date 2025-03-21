@@ -22,4 +22,7 @@ public interface ProductPriceJpaRepository extends JpaRepository<ProductPrice, L
         // findNewest
     Optional<ProductPrice> findNewestByProductBusinessIdAndData(BusinessId productId, LocalDate untilDate);
 
+    long deleteByBusinessId(BusinessId businessId);
+
+    boolean existsByBusinessIdAndProductUserBusinessId(BusinessId businessId, BusinessId businessId1);
 }

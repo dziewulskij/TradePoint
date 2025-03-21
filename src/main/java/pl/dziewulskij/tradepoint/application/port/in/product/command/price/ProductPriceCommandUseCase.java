@@ -7,4 +7,6 @@ public interface ProductPriceCommandUseCase {
 
     ProductPriceResult create(CreateProductPriceCommand command);
 
+    void delete(DeleteProductPriceCommand command);
+
 }

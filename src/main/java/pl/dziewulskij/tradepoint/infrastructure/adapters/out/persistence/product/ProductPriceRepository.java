@@ -3,6 +3,7 @@ package pl.dziewulskij.tradepoint.infrastructure.adapters.out.persistence.produc
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 import pl.dziewulskij.tradepoint.application.port.out.product.LoadProductPricePort;
+import pl.dziewulskij.tradepoint.application.port.out.product.RemoveProductPricePort;
 import pl.dziewulskij.tradepoint.application.port.out.product.SaveProductPricePort;
 import pl.dziewulskij.tradepoint.domain.product.ProductPrice;
 import pl.dziewulskij.tradepoint.domain.shared.BusinessId;
@@ -13,7 +14,7 @@ import java.util.Optional;
 
 @Repository
 @RequiredArgsConstructor
-public class ProductPriceRepository implements LoadProductPricePort, SaveProductPricePort {
+public class ProductPriceRepository implements LoadProductPricePort, SaveProductPricePort, RemoveProductPricePort {
 
     private final ProductPriceJpaRepository productPriceJpaRepository;
 
@@ -32,4 +33,8 @@ public class ProductPriceRepository implements LoadProductPricePort, SaveProduct
         return productPriceJpaRepository.findNewestByProductBusinessIdAndData(productId, LocalDate.now());
     }
 
+    @Override
+    public void deleteByBusinessId(BusinessId productPriceId) {
+        productPriceJpaRepository.deleteByBusinessId(productPriceId);
+    }
 }
