@@ -1,4 +1,4 @@
-package pl.dziewulskij.tradepoint.application.product;
+package pl.dziewulskij.tradepoint.application.product.validator;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -13,7 +13,7 @@ public class ProductNameUniquenessValidator {
 
     private final ProductExistencePort productExistencePort;
 
-    void validateForCreation(String productName) {
+    public void validateForCreation(String productName) {
         BusinessId currentUserId = AuthenticationUtils.getCurrentUserId();
 
         if (productExistencePort.existsByNameAndUserId(productName, currentUserId)) {
@@ -21,7 +21,7 @@ public class ProductNameUniquenessValidator {
         }
     }
 
-    void validateForUpdate(String productName, BusinessId productId) {
+    public void validateForUpdate(String productName, BusinessId productId) {
         BusinessId currentUserId = AuthenticationUtils.getCurrentUserId();
 
         if (productExistencePort.existsByNameAndUserIdExcludingProductId(productName, currentUserId, productId)) {

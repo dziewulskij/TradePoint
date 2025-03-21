@@ -3,9 +3,13 @@ package pl.dziewulskij.tradepoint.domain.product;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+import pl.dziewulskij.tradepoint.application.port.in.product.command.CreateProductCommand;
 import pl.dziewulskij.tradepoint.application.port.in.product.command.UpdateProductCommand;
 import pl.dziewulskij.tradepoint.domain.shared.BusinessId;
 import pl.dziewulskij.tradepoint.domain.user.User;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Builder
 @Entity
@@ -43,6 +47,17 @@ public class Product {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     User user;
+
+    @OneToMany(mappedBy = "product", cascade = CascadeType.REMOVE)
+    Set<ProductPrice> productPrices = new HashSet<>();
+
+    public static Product create(CreateProductCommand command, User user) {
+        return Product.builder()
+                .name(command.name())
+                .unit(command.unit())
+                .user(user)
+                .build();
+    }
 
     public void update(UpdateProductCommand command) {
         this.setName(command.name());

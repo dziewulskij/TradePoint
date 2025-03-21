@@ -1,4 +1,4 @@
-package pl.dziewulskij.tradepoint.application.product;
+package pl.dziewulskij.tradepoint.application.product.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -12,7 +12,7 @@ public class ProductProvider {
 
     private final LoadProductPort loadProductPort;
 
-    Product byBusinessId(BusinessId businessId) {
+    public Product byBusinessId(BusinessId businessId) {
         return loadProductPort.findByBusinessId(businessId)
                 .orElseThrow(() -> new RuntimeException("Product not found"));
     }
