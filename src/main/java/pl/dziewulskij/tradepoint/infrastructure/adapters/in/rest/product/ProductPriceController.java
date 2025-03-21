@@ -56,7 +56,7 @@ public class ProductPriceController {
 
     @DeleteMapping("/{productId}/prices/{priceId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void getActual(@PathVariable UUID productId, @PathVariable UUID priceId) {
+    public void delete(@PathVariable UUID productId, @PathVariable UUID priceId) {
         DeleteProductPriceCommand command = new DeleteProductPriceCommand(
                 ProductPriceWithProductIds.of(productId, priceId)
         );

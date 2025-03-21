@@ -17,4 +17,5 @@ public interface ProductJpaRepository extends JpaRepository<Product, Long> {
 
     boolean existsByNameAndUserBusinessId(String name, BusinessId businessId);
 
+    boolean existsByBusinessIdAndUserBusinessId(BusinessId businessId, BusinessId businessId1);
 }
