@@ -13,7 +13,7 @@ import java.util.Optional;
 
 @Repository
 @RequiredArgsConstructor
-public class ProductExistenceRepository implements SaveProductPort, LoadProductPort, ProductExistencePort {
+public class ProductRepository implements SaveProductPort, LoadProductPort, ProductExistencePort {
 
     private final ProductJpaRepository productJpaRepository;
 
@@ -30,6 +30,11 @@ public class ProductExistenceRepository implements SaveProductPort, LoadProductP
     @Override
     public Optional<Product> findByBusinessId(BusinessId productId) {
         return productJpaRepository.findByBusinessId(productId);
+    }
+
+    @Override
+    public boolean existsByIdAndUserId(BusinessId productId, BusinessId userId) {
+        return productJpaRepository.existsByBusinessIdAndUserBusinessId(productId, userId);
     }
 
     @Override

@@ -12,6 +12,7 @@ import pl.dziewulskij.tradepoint.domain.shared.BusinessId;
 public class CustomerCommandServiceDelegate implements CustomerCommandUseCase {
 
     private final CustomerCommandServiceProvider customerCommandServiceProvider;
+    private final CustomerBelongToUserValidator customerBelongToUserValidator;
 
     @Override
     public CommandCustomerResult create(CustomerCommand command) {
@@ -20,8 +21,9 @@ public class CustomerCommandServiceDelegate implements CustomerCommandUseCase {
     }
 
     @Override
-    public CommandCustomerResult update(BusinessId id, CustomerCommand command) {
+    public CommandCustomerResult update(BusinessId customerId, CustomerCommand command) {
+        customerBelongToUserValidator.validate(customerId);
         return customerCommandServiceProvider.getService(command.type())
-                .update(id, command);
+                .update(customerId, command);
     }
 }
