@@ -4,10 +4,8 @@ import pl.dziewulskij.tradepoint.domain.shared.BusinessId;
 import pl.dziewulskij.tradepoint.infrastructure.annotations.OutputPort;
 
 @OutputPort
-public interface ProductExistencePort {
+public interface DeleteProductPort {
 
-    boolean existsByIdAndUserId(BusinessId productId, BusinessId userId);
-
-    boolean existsByNameAndUserId(String name, BusinessId userId);
+    void deleteByBusinessId(BusinessId productId);
 
 }

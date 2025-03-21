@@ -7,14 +7,13 @@ import org.mapstruct.Mapping;
 import org.mapstruct.Named;
 import pl.dziewulskij.tradepoint.application.port.in.product.command.CreateProductCommand;
 import pl.dziewulskij.tradepoint.application.port.in.product.command.CreateProductResult;
-import pl.dziewulskij.tradepoint.application.port.in.product.command.UpdateProductCommand;
-import pl.dziewulskij.tradepoint.application.port.in.product.command.UpdateProductResult;
 import pl.dziewulskij.tradepoint.application.port.in.product.query.GetProductResult;
 import pl.dziewulskij.tradepoint.domain.shared.BusinessId;
-import pl.dziewulskij.tradepoint.infrastructure.adapters.in.rest.product.dto.*;
+import pl.dziewulskij.tradepoint.infrastructure.adapters.in.rest.product.dto.CreateProductRequest;
+import pl.dziewulskij.tradepoint.infrastructure.adapters.in.rest.product.dto.CreateProductResponse;
+import pl.dziewulskij.tradepoint.infrastructure.adapters.in.rest.product.dto.GetProductResponse;
 
 import java.util.List;
-import java.util.UUID;
 
 @Mapper(imports = {BusinessId.class, StringUtil.class})
 public interface ProductApiMapper {
@@ -23,11 +22,7 @@ public interface ProductApiMapper {
     @Mapping(source = "unit", target = "unit", qualifiedByName = "blankToNullTrim")
     CreateProductCommand toCreateCommand(CreateProductRequest request);
 
-    UpdateProductCommand toUpdateCommand(UUID id, UpdateProductRequest request);
-
     CreateProductResponse toResponse(CreateProductResult result);
-
-    UpdateProductResponse toResponse(UpdateProductResult result);
 
     GetProductResponse toResponse(GetProductResult result);
 

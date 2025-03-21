@@ -9,13 +9,14 @@ import java.util.Optional;
 
 public interface ProductJpaRepository extends JpaRepository<Product, Long> {
 
-    List<Product> findByUserBusinessId(BusinessId businessId);
+    List<Product> findByUserBusinessId(BusinessId userId);
 
-    Optional<Product> findByBusinessId(BusinessId businessId);
+    Optional<Product> findByBusinessId(BusinessId productId);
 
-    boolean existsByNameAndUserBusinessIdAndBusinessIdNot(String name, BusinessId businessId, BusinessId businessId1);
+    boolean existsByNameAndUserBusinessId(String name, BusinessId userId);
 
-    boolean existsByNameAndUserBusinessId(String name, BusinessId businessId);
+    boolean existsByBusinessIdAndUserBusinessId(BusinessId productId, BusinessId userId);
 
-    boolean existsByBusinessIdAndUserBusinessId(BusinessId businessId, BusinessId businessId1);
+    void deleteByBusinessId(BusinessId productId);
+
 }
