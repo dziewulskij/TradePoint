@@ -1,10 +1,12 @@
-package pl.dziewulskij.tradepoint.application.product;
+package pl.dziewulskij.tradepoint.application.product.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.dziewulskij.tradepoint.application.port.in.product.command.*;
 import pl.dziewulskij.tradepoint.application.port.out.product.SaveProductPort;
+import pl.dziewulskij.tradepoint.application.product.mapper.ProductMapper;
+import pl.dziewulskij.tradepoint.application.product.validator.ProductNameUniquenessValidator;
 import pl.dziewulskij.tradepoint.application.user.UserProvider;
 import pl.dziewulskij.tradepoint.domain.product.Product;
 import pl.dziewulskij.tradepoint.domain.user.User;
@@ -23,7 +25,7 @@ public class ProductCommandService implements ProductCommandUseCase {
     public CreateProductResult create(CreateProductCommand command) {
         productNameUniquenessValidator.validateForCreation(command.name());
         User user = userProvider.currentUser();
-        Product product = productMapper.toCreate(command, user);
+        Product product = Product.create(command, user);
         saveProductPort.save(product);
         return productMapper.toCreateResult(product);
     }
