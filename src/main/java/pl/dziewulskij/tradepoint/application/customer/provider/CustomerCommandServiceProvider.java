@@ -1,7 +1,8 @@
-package pl.dziewulskij.tradepoint.application.customer;
+package pl.dziewulskij.tradepoint.application.customer.provider;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import pl.dziewulskij.tradepoint.application.customer.service.CustomerCommandService;
 import pl.dziewulskij.tradepoint.domain.customer.CustomerType;
 
 import java.util.List;

@@ -4,7 +4,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import pl.dziewulskij.tradepoint.application.customer.CustomerCommandServiceDelegate;
+import pl.dziewulskij.tradepoint.application.customer.service.CustomerCommandServiceDelegate;
 import pl.dziewulskij.tradepoint.application.port.in.customer.command.CommandCustomerResult;
 import pl.dziewulskij.tradepoint.application.port.in.customer.command.CustomerCommand;
 import pl.dziewulskij.tradepoint.application.port.in.customer.query.CustomerQueryUseCase;

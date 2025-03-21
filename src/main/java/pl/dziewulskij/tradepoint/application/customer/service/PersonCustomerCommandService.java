@@ -1,9 +1,8 @@
-package pl.dziewulskij.tradepoint.application.customer.person;
+package pl.dziewulskij.tradepoint.application.customer.service;
 
 import org.springframework.stereotype.Service;
-import pl.dziewulskij.tradepoint.application.customer.CustomerCommandService;
-import pl.dziewulskij.tradepoint.application.customer.CustomerProvider;
 import pl.dziewulskij.tradepoint.application.customer.mapper.DiscriminatedCustomerMapper;
+import pl.dziewulskij.tradepoint.application.customer.provider.CustomerProvider;
 import pl.dziewulskij.tradepoint.application.port.in.customer.command.CommandCustomerResult;
 import pl.dziewulskij.tradepoint.application.port.in.customer.command.CustomerCommand;
 import pl.dziewulskij.tradepoint.application.port.out.customer.SaveCustomerPort;

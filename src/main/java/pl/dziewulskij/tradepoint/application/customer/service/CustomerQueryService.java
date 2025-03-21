@@ -1,4 +1,4 @@
-package pl.dziewulskij.tradepoint.application.customer;
+package pl.dziewulskij.tradepoint.application.customer.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

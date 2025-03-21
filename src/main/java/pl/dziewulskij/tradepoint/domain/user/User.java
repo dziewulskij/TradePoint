@@ -9,6 +9,7 @@ import pl.dziewulskij.tradepoint.domain.customer.Customer;
 import pl.dziewulskij.tradepoint.domain.password.PasswordReset;
 import pl.dziewulskij.tradepoint.domain.product.Product;
 import pl.dziewulskij.tradepoint.domain.shared.BusinessId;
+import pl.dziewulskij.tradepoint.domain.transaction.Transaction;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -61,5 +62,8 @@ public class User extends TimeAuditable {
 
     @OneToMany(mappedBy = "user")
     Set<Customer> customers = new HashSet<>();
+
+    @OneToMany(mappedBy = "user")
+    Set<Transaction> transactions = new HashSet<>();
 
 }

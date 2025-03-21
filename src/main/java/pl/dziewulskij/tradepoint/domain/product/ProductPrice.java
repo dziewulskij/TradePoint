@@ -6,8 +6,8 @@ import lombok.experimental.FieldDefaults;
 import pl.dziewulskij.tradepoint.application.port.in.product.command.price.CreateProductPriceCommand;
 import pl.dziewulskij.tradepoint.domain.audit.TimeAuditable;
 import pl.dziewulskij.tradepoint.domain.shared.BusinessId;
+import pl.dziewulskij.tradepoint.domain.shared.Price;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Builder
@@ -33,8 +33,9 @@ public class ProductPrice extends TimeAuditable {
     @Builder.Default
     BusinessId businessId = new BusinessId();
 
-    @Column(name = "price", nullable = false, precision = 19, scale = 4)
-    BigDecimal price;
+    @Embedded
+    @AttributeOverride(name = "value", column = @Column(name = "price", nullable = false, precision = 19, scale = 2))
+    Price price;
 
     @Column(name = "valid_from", nullable = false)
     LocalDate validFrom;

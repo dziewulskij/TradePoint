@@ -6,6 +6,7 @@ import lombok.experimental.FieldDefaults;
 import pl.dziewulskij.tradepoint.application.port.in.product.command.CreateProductCommand;
 import pl.dziewulskij.tradepoint.application.port.in.product.command.UpdateProductCommand;
 import pl.dziewulskij.tradepoint.domain.shared.BusinessId;
+import pl.dziewulskij.tradepoint.domain.transaction.Transaction;
 import pl.dziewulskij.tradepoint.domain.user.User;
 
 import java.util.HashSet;
@@ -50,6 +51,9 @@ public class Product {
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.REMOVE)
     Set<ProductPrice> productPrices = new HashSet<>();
+
+    @OneToMany(mappedBy = "product")
+    Set<Transaction> transactions = new HashSet<>();
 
     public static Product create(CreateProductCommand command, User user) {
         return Product.builder()

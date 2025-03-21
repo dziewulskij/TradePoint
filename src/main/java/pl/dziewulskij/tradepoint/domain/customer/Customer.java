@@ -6,7 +6,11 @@ import lombok.experimental.FieldDefaults;
 import lombok.experimental.SuperBuilder;
 import pl.dziewulskij.tradepoint.domain.audit.TimeAuditable;
 import pl.dziewulskij.tradepoint.domain.shared.BusinessId;
+import pl.dziewulskij.tradepoint.domain.transaction.Transaction;
 import pl.dziewulskij.tradepoint.domain.user.User;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Setter
@@ -51,5 +55,8 @@ public class Customer extends TimeAuditable {
     @Enumerated(EnumType.STRING)
     @Column(name = "customer_type", nullable = false, insertable = false, updatable = false)
     CustomerType customerType;
+
+    @OneToMany(mappedBy = "customer")
+    Set<Transaction> transactions = new HashSet<>();
 
 }

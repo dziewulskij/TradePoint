@@ -30,7 +30,6 @@ public class ProductPriceController {
     private final ActualProductPriceUseCase actualProductPriceUseCase;
     private final ProductPriceApiMapper productPriceApiMapper;
 
-
     @PostMapping("/{productId}/prices")
     @ResponseStatus(HttpStatus.CREATED)
     public ProductPriceResponse create(@PathVariable UUID productId,

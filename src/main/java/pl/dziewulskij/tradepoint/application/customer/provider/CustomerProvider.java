@@ -1,4 +1,4 @@
-package pl.dziewulskij.tradepoint.application.customer;
+package pl.dziewulskij.tradepoint.application.customer.provider;
 
 import lombok.RequiredArgsConstructor;
 import pl.dziewulskij.tradepoint.application.port.out.customer.LoadCustomerPort;

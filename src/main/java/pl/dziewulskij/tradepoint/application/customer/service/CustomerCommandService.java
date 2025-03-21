@@ -1,7 +1,8 @@
-package pl.dziewulskij.tradepoint.application.customer;
+package pl.dziewulskij.tradepoint.application.customer.service;
 
 import lombok.RequiredArgsConstructor;
 import pl.dziewulskij.tradepoint.application.customer.mapper.DiscriminatedCustomerMapper;
+import pl.dziewulskij.tradepoint.application.customer.provider.CustomerProvider;
 import pl.dziewulskij.tradepoint.application.port.in.customer.command.CommandCustomerResult;
 import pl.dziewulskij.tradepoint.application.port.in.customer.command.CustomerCommand;
 import pl.dziewulskij.tradepoint.application.port.out.customer.SaveCustomerPort;

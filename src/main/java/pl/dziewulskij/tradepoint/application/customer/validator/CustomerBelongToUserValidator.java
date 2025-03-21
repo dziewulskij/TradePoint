@@ -1,4 +1,4 @@
-package pl.dziewulskij.tradepoint.application.customer;
+package pl.dziewulskij.tradepoint.application.customer.validator;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;

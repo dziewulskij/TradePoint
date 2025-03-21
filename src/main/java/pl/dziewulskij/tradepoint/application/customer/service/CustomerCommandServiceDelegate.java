@@ -1,7 +1,9 @@
-package pl.dziewulskij.tradepoint.application.customer;
+package pl.dziewulskij.tradepoint.application.customer.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+import pl.dziewulskij.tradepoint.application.customer.provider.CustomerCommandServiceProvider;
+import pl.dziewulskij.tradepoint.application.customer.validator.CustomerBelongToUserValidator;
 import pl.dziewulskij.tradepoint.application.port.in.customer.command.CommandCustomerResult;
 import pl.dziewulskij.tradepoint.application.port.in.customer.command.CustomerCommand;
 import pl.dziewulskij.tradepoint.application.port.in.customer.command.CustomerCommandUseCase;

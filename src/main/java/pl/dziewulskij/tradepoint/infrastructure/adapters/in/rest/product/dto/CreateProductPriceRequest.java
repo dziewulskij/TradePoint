@@ -11,8 +11,8 @@ import java.time.LocalDate;
 public record CreateProductPriceRequest(
         @JsonProperty("price")
         @NotNull
-        @DecimalMin("0.0000")
-        @DecimalMax("999999999999999.9999")
+        @DecimalMin("0.00")
+        @DecimalMax("999999999999999.99")
         BigDecimal price,
 
         @JsonProperty("validFrom")
