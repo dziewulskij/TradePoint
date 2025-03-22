@@ -50,7 +50,7 @@ public class ProductRepositoryAdapter implements
     }
 
     @Override
-    public void deleteByBusinessId(BusinessId productId) {
+    public void deleteById(BusinessId productId) {
         productJpaRepository.deleteByBusinessId(productId);
     }
 

@@ -2,10 +2,10 @@ package pl.dziewulskij.tradepoint.infrastructure.adapters.out.persistence.produc
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
-import pl.dziewulskij.tradepoint.application.port.out.product.DeleteProductPricePort;
-import pl.dziewulskij.tradepoint.application.port.out.product.LoadProductPricePort;
 import pl.dziewulskij.tradepoint.application.port.out.product.ProductPriceExistencePort;
-import pl.dziewulskij.tradepoint.application.port.out.product.SaveProductPricePort;
+import pl.dziewulskij.tradepoint.application.port.out.product.price.DeleteProductPricePort;
+import pl.dziewulskij.tradepoint.application.port.out.product.price.LoadProductPricePort;
+import pl.dziewulskij.tradepoint.application.port.out.product.price.SaveProductPricePort;
 import pl.dziewulskij.tradepoint.domain.product.ProductPrice;
 import pl.dziewulskij.tradepoint.domain.shared.BusinessId;
 import pl.dziewulskij.tradepoint.infrastructure.annotations.OutputAdapter;
