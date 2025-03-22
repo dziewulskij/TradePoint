@@ -7,8 +7,8 @@ import pl.dziewulskij.tradepoint.application.port.in.product.command.price.Creat
 import pl.dziewulskij.tradepoint.application.port.in.product.command.price.DeleteProductPriceCommand;
 import pl.dziewulskij.tradepoint.application.port.in.product.command.price.ProductPriceCommandUseCase;
 import pl.dziewulskij.tradepoint.application.port.in.product.command.price.ProductPriceResult;
-import pl.dziewulskij.tradepoint.application.port.out.product.DeleteProductPricePort;
-import pl.dziewulskij.tradepoint.application.port.out.product.SaveProductPricePort;
+import pl.dziewulskij.tradepoint.application.port.out.product.price.DeleteProductPricePort;
+import pl.dziewulskij.tradepoint.application.port.out.product.price.SaveProductPricePort;
 import pl.dziewulskij.tradepoint.application.product.mapper.ProductPriceMapper;
 import pl.dziewulskij.tradepoint.application.product.validator.ProductPriceBelongToUserValidator;
 import pl.dziewulskij.tradepoint.domain.product.Product;
@@ -26,6 +26,7 @@ public class ProductPriceCommandService implements ProductPriceCommandUseCase {
     private final ProductPriceBelongToUserValidator productPriceBelongToUserValidator;
 
     @Override
+    @Transactional
     public ProductPriceResult create(CreateProductPriceCommand command) {
         Product product = productProvider.byBusinessId(command.productId());
         ProductPrice productPrice = ProductPrice.create(command, product);
@@ -38,6 +39,6 @@ public class ProductPriceCommandService implements ProductPriceCommandUseCase {
     public void delete(DeleteProductPriceCommand command) {
         ProductPriceWithProductIds productPriceWithProductIds = command.productPriceWithProductIds();
         productPriceBelongToUserValidator.validate(productPriceWithProductIds);
-        deleteProductPricePort.deleteByBusinessId(productPriceWithProductIds.productPriceId());
+        deleteProductPricePort.deleteById(productPriceWithProductIds.productPriceId());
     }
 }

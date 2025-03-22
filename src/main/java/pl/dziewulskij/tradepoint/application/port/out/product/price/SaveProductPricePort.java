@@ -1,4 +1,4 @@
-package pl.dziewulskij.tradepoint.application.port.out.product;
+package pl.dziewulskij.tradepoint.application.port.out.product.price;
 
 import pl.dziewulskij.tradepoint.domain.product.ProductPrice;
 import pl.dziewulskij.tradepoint.infrastructure.annotations.OutputPort;

@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import pl.dziewulskij.tradepoint.application.port.in.product.command.price.ProductPriceResult;
 import pl.dziewulskij.tradepoint.application.port.in.product.query.ActualProductPriceUseCase;
 import pl.dziewulskij.tradepoint.application.port.in.product.query.ProductPriceQueryUseCase;
-import pl.dziewulskij.tradepoint.application.port.out.product.LoadProductPricePort;
+import pl.dziewulskij.tradepoint.application.port.out.product.price.LoadProductPricePort;
 import pl.dziewulskij.tradepoint.application.product.mapper.ProductPriceMapper;
 import pl.dziewulskij.tradepoint.application.product.validator.ProductBelongToUserValidator;
 import pl.dziewulskij.tradepoint.domain.exception.ProductPriceNotFoundException;

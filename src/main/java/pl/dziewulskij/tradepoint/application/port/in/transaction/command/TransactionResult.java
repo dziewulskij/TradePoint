@@ -1,4 +1,4 @@
-package pl.dziewulskij.tradepoint.application.port.in.transaction;
+package pl.dziewulskij.tradepoint.application.port.in.transaction.command;
 
 import pl.dziewulskij.tradepoint.domain.shared.BusinessId;
 import pl.dziewulskij.tradepoint.domain.shared.TransactionTotal;

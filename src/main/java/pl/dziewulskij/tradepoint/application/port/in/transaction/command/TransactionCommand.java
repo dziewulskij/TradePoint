@@ -1,4 +1,4 @@
-package pl.dziewulskij.tradepoint.application.port.in.transaction;
+package pl.dziewulskij.tradepoint.application.port.in.transaction.command;
 
 import pl.dziewulskij.tradepoint.domain.shared.BusinessId;
 import pl.dziewulskij.tradepoint.domain.shared.Price;
@@ -6,7 +6,7 @@ import pl.dziewulskij.tradepoint.domain.shared.Quantity;
 import pl.dziewulskij.tradepoint.domain.transaction.PaymentStatus;
 import pl.dziewulskij.tradepoint.domain.transaction.PaymentType;
 
-public record CreateTransactionCommand(
+public record TransactionCommand(
         PaymentType paymentType,
         PaymentStatus paymentStatus,
         Quantity quantity,

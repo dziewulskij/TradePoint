@@ -31,6 +31,7 @@ public class CustomerController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public CustomerResponse create(@RequestBody @Valid CustomerRequest request) {
+        CustomerApiValidator.validate(request);
         CustomerCommand createCommand = customerRestMapper.toCommand(request);
         CommandCustomerResult commandCustomerResult = customerCommandUseCase.create(createCommand);
         return customerRestMapper.toResponse(commandCustomerResult);
@@ -39,6 +40,7 @@ public class CustomerController {
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     public CustomerResponse update(@PathVariable UUID id, @RequestBody @Valid CustomerRequest request) {
+        CustomerApiValidator.validate(request);
         CustomerCommand updateCommand = customerRestMapper.toCommand(request);
         CommandCustomerResult updateResult = customerCommandUseCase.update(BusinessId.of(id), updateCommand);
         return customerRestMapper.toResponse(updateResult);

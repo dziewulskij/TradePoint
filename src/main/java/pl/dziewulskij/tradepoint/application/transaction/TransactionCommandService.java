@@ -3,17 +3,16 @@ package pl.dziewulskij.tradepoint.application.transaction;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import pl.dziewulskij.tradepoint.application.customer.provider.CustomerProvider;
-import pl.dziewulskij.tradepoint.application.customer.validator.CustomerBelongToUserValidator;
-import pl.dziewulskij.tradepoint.application.port.in.transaction.CreateTransactionCommand;
-import pl.dziewulskij.tradepoint.application.port.in.transaction.TransactionCommandUseCase;
-import pl.dziewulskij.tradepoint.application.port.in.transaction.TransactionResult;
+import pl.dziewulskij.tradepoint.application.port.in.transaction.command.TransactionCommand;
+import pl.dziewulskij.tradepoint.application.port.in.transaction.command.TransactionCommandUseCase;
+import pl.dziewulskij.tradepoint.application.port.in.transaction.command.TransactionResult;
+import pl.dziewulskij.tradepoint.application.port.out.transaction.DeleteTransactionPort;
 import pl.dziewulskij.tradepoint.application.port.out.transaction.SaveTransactionPort;
-import pl.dziewulskij.tradepoint.application.product.service.ProductProvider;
-import pl.dziewulskij.tradepoint.application.product.validator.ProductBelongToUserValidator;
-import pl.dziewulskij.tradepoint.application.user.UserProvider;
+import pl.dziewulskij.tradepoint.application.transaction.mapper.TransactionMapper;
+import pl.dziewulskij.tradepoint.application.transaction.validator.TransactionCommandValidatorFacade;
 import pl.dziewulskij.tradepoint.domain.customer.Customer;
 import pl.dziewulskij.tradepoint.domain.product.Product;
+import pl.dziewulskij.tradepoint.domain.shared.BusinessId;
 import pl.dziewulskij.tradepoint.domain.transaction.Transaction;
 import pl.dziewulskij.tradepoint.domain.transaction.TransactionFactory;
 import pl.dziewulskij.tradepoint.domain.user.User;
@@ -23,26 +22,45 @@ import pl.dziewulskij.tradepoint.domain.user.User;
 public class TransactionCommandService implements TransactionCommandUseCase {
 
     private final SaveTransactionPort saveTransactionPort;
+    private final DeleteTransactionPort deleteTransactionPort;
     private final TransactionMapper transactionMapper;
     private final TransactionFactory transactionFactory;
-    private final UserProvider userProvider;
-    private final CustomerProvider<Customer> customerProvider;
-    private final ProductProvider productProvider;
-    private final CustomerBelongToUserValidator customerBelongToUserValidator;
-    private final ProductBelongToUserValidator productBelongToUserValidator;
+    private final TransactionCommandProviderFacade commandProviderFacade;
+    private final TransactionCommandValidatorFacade commandValidatorFacade;
 
     @Override
     @Transactional
-    public TransactionResult create(CreateTransactionCommand command) {
-        customerBelongToUserValidator.validate(command.customerId());
-        productBelongToUserValidator.validate(command.productId());
+    public TransactionResult create(TransactionCommand command) {
+        commandValidatorFacade.validateForCreationOrUpdate(command);
 
-        User user = userProvider.currentUser();
-        Customer customer = customerProvider.byBusinessId(command.customerId());
-        Product product = productProvider.byBusinessId(command.productId());
+        User user = commandProviderFacade.currentUser();
+        Customer customer = commandProviderFacade.customerByBusinessId(command.customerId());
+        Product product = commandProviderFacade.productByBusinessId(command.productId());
         Transaction transaction = transactionFactory.createFrom(command, user, customer, product);
 
         saveTransactionPort.save(transaction);
         return transactionMapper.toResult(transaction);
     }
+
+    @Override
+    @Transactional
+    public TransactionResult update(BusinessId transactionId, TransactionCommand command) {
+        commandValidatorFacade.validateForCreationOrUpdate(command);
+
+        Transaction transaction = commandProviderFacade.transactionByBusinessId(transactionId);
+        Customer customer = commandProviderFacade.customerByBusinessId(command.customerId());
+        Product product = commandProviderFacade.productByBusinessId(command.productId());
+        transaction.update(command, customer, product);
+
+        saveTransactionPort.save(transaction);
+        return transactionMapper.toResult(transaction);
+    }
+
+    @Override
+    @Transactional
+    public void delete(BusinessId transactionId) {
+        commandValidatorFacade.validateForDeletion(transactionId);
+        deleteTransactionPort.deleteById(transactionId);
+    }
+
 }

@@ -6,12 +6,14 @@ import pl.dziewulskij.tradepoint.application.port.out.customer.LoadCustomerPort;
 import pl.dziewulskij.tradepoint.application.port.out.customer.SaveCustomerPort;
 import pl.dziewulskij.tradepoint.domain.customer.Customer;
 import pl.dziewulskij.tradepoint.domain.shared.BusinessId;
+import pl.dziewulskij.tradepoint.infrastructure.annotations.OutputAdapter;
 
 import java.util.Optional;
 
+@OutputAdapter
 @Repository
 @RequiredArgsConstructor
-public class CustomerRepository<T extends Customer> implements SaveCustomerPort<T>, LoadCustomerPort<T> {
+public class CustomerRepositoryAdapter<T extends Customer> implements SaveCustomerPort<T>, LoadCustomerPort<T> {
 
     private final CustomerJpaRepository<T> customerJpaRepository;
 

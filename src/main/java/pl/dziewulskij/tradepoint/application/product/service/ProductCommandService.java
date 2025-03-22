@@ -39,7 +39,7 @@ public class ProductCommandService implements ProductCommandUseCase {
     @Transactional
     public void delete(BusinessId productId) {
         productCommandValidatorFacade.validateForDeletion(productId);
-        deleteProductPort.deleteByBusinessId(productId);
+        deleteProductPort.deleteById(productId);
     }
 
 }
