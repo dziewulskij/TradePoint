@@ -1,4 +1,11 @@
 package pl.dziewulskij.tradepoint.domain.exception;
 
-public class PasswordResetNotFoundException extends RuntimeException {
+import pl.dziewulskij.tradepoint.infrastructure.exception.ErrorCode;
+import pl.dziewulskij.tradepoint.infrastructure.exception.TradePointException;
+
+public class PasswordResetNotFoundException extends TradePointException {
+
+    public PasswordResetNotFoundException() {
+        super(ErrorCode.PASSWORD_RESET_NOT_FOUND);
+    }
 }
