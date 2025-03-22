@@ -14,7 +14,12 @@ public class TransactionProvider {
     private final LoadTransactionPort loadTransactionPort;
 
     public Transaction byBusinessId(BusinessId transactionId) {
-        return loadTransactionPort.getByBusinessId(transactionId)
+        return loadTransactionPort.findByBusinessId(transactionId)
+                .orElseThrow(TransactionNotFoundException::new);
+    }
+
+    public Transaction byBusinessIdFetchProductAndCustomer(BusinessId transactionId) {
+        return loadTransactionPort.findByBusinessIdFetchProductAndCustomer(transactionId)
                 .orElseThrow(TransactionNotFoundException::new);
     }
 

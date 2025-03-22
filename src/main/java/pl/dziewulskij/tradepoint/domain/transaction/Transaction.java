@@ -3,7 +3,7 @@ package pl.dziewulskij.tradepoint.domain.transaction;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
-import pl.dziewulskij.tradepoint.application.port.in.transaction.TransactionCommand;
+import pl.dziewulskij.tradepoint.application.port.in.transaction.command.TransactionCommand;
 import pl.dziewulskij.tradepoint.domain.audit.TimeAuditable;
 import pl.dziewulskij.tradepoint.domain.customer.Customer;
 import pl.dziewulskij.tradepoint.domain.product.Product;

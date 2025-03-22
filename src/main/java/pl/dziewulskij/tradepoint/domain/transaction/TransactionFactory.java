@@ -1,7 +1,7 @@
 package pl.dziewulskij.tradepoint.domain.transaction;
 
 import org.springframework.stereotype.Component;
-import pl.dziewulskij.tradepoint.application.port.in.transaction.TransactionCommand;
+import pl.dziewulskij.tradepoint.application.port.in.transaction.command.TransactionCommand;
 import pl.dziewulskij.tradepoint.domain.customer.Customer;
 import pl.dziewulskij.tradepoint.domain.product.Product;
 import pl.dziewulskij.tradepoint.domain.shared.TransactionTotal;

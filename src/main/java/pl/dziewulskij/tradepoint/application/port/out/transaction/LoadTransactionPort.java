@@ -7,6 +7,8 @@ import java.util.Optional;
 
 public interface LoadTransactionPort {
 
-    Optional<Transaction> getByBusinessId(BusinessId transactionId);
+    Optional<Transaction> findByBusinessId(BusinessId transactionId);
+
+    Optional<Transaction> findByBusinessIdFetchProductAndCustomer(BusinessId transactionId);
 
 }
