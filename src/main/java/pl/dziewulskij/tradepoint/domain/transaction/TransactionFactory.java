@@ -1,7 +1,7 @@
 package pl.dziewulskij.tradepoint.domain.transaction;
 
 import org.springframework.stereotype.Component;
-import pl.dziewulskij.tradepoint.application.port.in.transaction.CreateTransactionCommand;
+import pl.dziewulskij.tradepoint.application.port.in.transaction.TransactionCommand;
 import pl.dziewulskij.tradepoint.domain.customer.Customer;
 import pl.dziewulskij.tradepoint.domain.product.Product;
 import pl.dziewulskij.tradepoint.domain.shared.TransactionTotal;
@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @Component
 public class TransactionFactory {
 
-    public Transaction createFrom(CreateTransactionCommand command, User user, Customer customer, Product product) {
+    public Transaction createFrom(TransactionCommand command, User user, Customer customer, Product product) {
         TransactionTotal total = new TransactionTotal(command.price(), command.quantity());
 
         return Transaction.builder()

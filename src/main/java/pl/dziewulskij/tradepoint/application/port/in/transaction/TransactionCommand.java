@@ -6,7 +6,7 @@ import pl.dziewulskij.tradepoint.domain.shared.Quantity;
 import pl.dziewulskij.tradepoint.domain.transaction.PaymentStatus;
 import pl.dziewulskij.tradepoint.domain.transaction.PaymentType;
 
-public record CreateTransactionCommand(
+public record TransactionCommand(
         PaymentType paymentType,
         PaymentStatus paymentStatus,
         Quantity quantity,
