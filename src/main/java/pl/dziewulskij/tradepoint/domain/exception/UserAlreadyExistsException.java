@@ -1,4 +1,11 @@
 package pl.dziewulskij.tradepoint.domain.exception;
 
-public class UserAlreadyExistsException extends RuntimeException {
+import pl.dziewulskij.tradepoint.infrastructure.exception.ErrorCode;
+import pl.dziewulskij.tradepoint.infrastructure.exception.TradePointException;
+
+public class UserAlreadyExistsException extends TradePointException {
+
+    public UserAlreadyExistsException() {
+        super(ErrorCode.USER_ALREADY_EXISTS);
+    }
 }
