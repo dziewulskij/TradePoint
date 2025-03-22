@@ -2,18 +2,25 @@ package pl.dziewulskij.tradepoint.infrastructure.adapters.out.persistence.transa
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
+import pl.dziewulskij.tradepoint.application.port.out.transaction.DeleteTransactionPort;
 import pl.dziewulskij.tradepoint.application.port.out.transaction.SaveTransactionPort;
 import pl.dziewulskij.tradepoint.application.port.out.transaction.TransactionExistencePort;
 import pl.dziewulskij.tradepoint.domain.shared.BusinessId;
 import pl.dziewulskij.tradepoint.domain.transaction.Transaction;
 import pl.dziewulskij.tradepoint.domain.transaction.info.TransactionOverviewInfo;
+import pl.dziewulskij.tradepoint.infrastructure.annotations.OutputAdapter;
 
 import java.util.List;
 import java.util.Optional;
 
+@OutputAdapter
 @Repository
 @RequiredArgsConstructor
-public class TransactionRepository implements SaveTransactionPort, LoadTransactionCompositePort, TransactionExistencePort {
+public class TransactionRepositoryAdapter implements
+        SaveTransactionPort,
+        LoadTransactionCompositePort,
+        TransactionExistencePort,
+        DeleteTransactionPort {
 
     private final TransactionJpaRepository transactionJpaRepository;
 
@@ -40,5 +47,10 @@ public class TransactionRepository implements SaveTransactionPort, LoadTransacti
     @Override
     public List<TransactionOverviewInfo> findAll(BusinessId userId) {
         return transactionJpaRepository.findTransactionOverviewInfoByUserId(userId);
+    }
+
+    @Override
+    public void deleteById(BusinessId transactionId) {
+        transactionJpaRepository.deleteByBusinessId(transactionId);
     }
 }

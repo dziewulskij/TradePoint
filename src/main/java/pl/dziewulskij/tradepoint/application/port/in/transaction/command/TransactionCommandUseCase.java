@@ -8,5 +8,8 @@ public interface TransactionCommandUseCase {
 
     TransactionResult create(TransactionCommand command);
 
-    TransactionResult update(BusinessId id, TransactionCommand command);
+    TransactionResult update(BusinessId transactionId, TransactionCommand command);
+
+    void delete(BusinessId transactionId);
+
 }

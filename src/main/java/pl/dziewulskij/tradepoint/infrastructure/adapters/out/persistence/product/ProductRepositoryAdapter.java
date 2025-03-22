@@ -6,10 +6,12 @@ import pl.dziewulskij.tradepoint.application.port.out.product.*;
 import pl.dziewulskij.tradepoint.domain.product.Product;
 import pl.dziewulskij.tradepoint.domain.shared.BusinessId;
 import pl.dziewulskij.tradepoint.infrastructure.adapters.out.persistence.transaction.TransactionJpaRepository;
+import pl.dziewulskij.tradepoint.infrastructure.annotations.OutputAdapter;
 
 import java.util.List;
 import java.util.Optional;
 
+@OutputAdapter
 @Repository
 @RequiredArgsConstructor
 public class ProductRepositoryAdapter implements

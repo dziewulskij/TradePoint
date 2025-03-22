@@ -7,6 +7,7 @@ import pl.dziewulskij.tradepoint.application.port.in.transaction.query.GetTransa
 import pl.dziewulskij.tradepoint.application.port.in.transaction.query.TransactionQueryUseCase;
 import pl.dziewulskij.tradepoint.application.port.out.transaction.LoadOverviewTransactionPort;
 import pl.dziewulskij.tradepoint.application.transaction.mapper.TransactionMapper;
+import pl.dziewulskij.tradepoint.application.transaction.validator.TransactionBelongToUserValidator;
 import pl.dziewulskij.tradepoint.domain.shared.BusinessId;
 import pl.dziewulskij.tradepoint.domain.transaction.Transaction;
 import pl.dziewulskij.tradepoint.domain.transaction.info.TransactionOverviewInfo;

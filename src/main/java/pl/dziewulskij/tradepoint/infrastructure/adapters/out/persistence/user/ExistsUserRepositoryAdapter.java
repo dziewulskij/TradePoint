@@ -15,7 +15,7 @@ import java.util.Optional;
 @OutputAdapter
 @Repository
 @RequiredArgsConstructor
-public class ExistsUserPortAdapter implements LoadUserPort, SaveUserPort, ExistsUserPort {
+public class ExistsUserRepositoryAdapter implements LoadUserPort, SaveUserPort, ExistsUserPort {
 
     private final UserJpaRepository userJpaRepository;
 

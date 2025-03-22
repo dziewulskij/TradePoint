@@ -6,12 +6,14 @@ import pl.dziewulskij.tradepoint.application.port.out.customer.CustomerExistence
 import pl.dziewulskij.tradepoint.application.port.out.customer.UserCustomersQueryPort;
 import pl.dziewulskij.tradepoint.domain.customer.Customer;
 import pl.dziewulskij.tradepoint.domain.shared.BusinessId;
+import pl.dziewulskij.tradepoint.infrastructure.annotations.OutputAdapter;
 
 import java.util.List;
 
+@OutputAdapter
 @Repository
 @RequiredArgsConstructor
-public class UnifiedCustomerRepository implements UserCustomersQueryPort, CustomerExistencePort {
+public class UnifiedCustomerRepositoryAdapter implements UserCustomersQueryPort, CustomerExistencePort {
 
     private final CustomerJpaRepository<Customer> commonCustomerJpaRepository;
 

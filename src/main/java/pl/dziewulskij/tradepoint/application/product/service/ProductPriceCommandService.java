@@ -26,6 +26,7 @@ public class ProductPriceCommandService implements ProductPriceCommandUseCase {
     private final ProductPriceBelongToUserValidator productPriceBelongToUserValidator;
 
     @Override
+    @Transactional
     public ProductPriceResult create(CreateProductPriceCommand command) {
         Product product = productProvider.byBusinessId(command.productId());
         ProductPrice productPrice = ProductPrice.create(command, product);
@@ -38,6 +39,6 @@ public class ProductPriceCommandService implements ProductPriceCommandUseCase {
     public void delete(DeleteProductPriceCommand command) {
         ProductPriceWithProductIds productPriceWithProductIds = command.productPriceWithProductIds();
         productPriceBelongToUserValidator.validate(productPriceWithProductIds);
-        deleteProductPricePort.deleteByBusinessId(productPriceWithProductIds.productPriceId());
+        deleteProductPricePort.deleteById(productPriceWithProductIds.productPriceId());
     }
 }

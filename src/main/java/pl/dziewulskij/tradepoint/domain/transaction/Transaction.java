@@ -6,6 +6,7 @@ import lombok.experimental.FieldDefaults;
 import pl.dziewulskij.tradepoint.application.port.in.transaction.command.TransactionCommand;
 import pl.dziewulskij.tradepoint.domain.audit.TimeAuditable;
 import pl.dziewulskij.tradepoint.domain.customer.Customer;
+import pl.dziewulskij.tradepoint.domain.exception.CannotDeletePaidTransactionException;
 import pl.dziewulskij.tradepoint.domain.product.Product;
 import pl.dziewulskij.tradepoint.domain.shared.BusinessId;
 import pl.dziewulskij.tradepoint.domain.shared.TransactionTotal;
@@ -77,5 +78,15 @@ public class Transaction extends TimeAuditable {
         this.total = new TransactionTotal(command.price(), command.quantity());
         this.customer = customer;
         this.product = product;
+    }
+
+    public void validateDeletable() {
+        if (!isNotPaid()) {
+            throw new CannotDeletePaidTransactionException();
+        }
+    }
+
+    public boolean isNotPaid() {
+        return paymentStatus == PaymentStatus.NOT_PAID;
     }
 }

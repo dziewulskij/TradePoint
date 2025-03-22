@@ -4,17 +4,24 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 import pl.dziewulskij.tradepoint.application.port.out.product.DeleteProductPricePort;
 import pl.dziewulskij.tradepoint.application.port.out.product.LoadProductPricePort;
+import pl.dziewulskij.tradepoint.application.port.out.product.ProductPriceExistencePort;
 import pl.dziewulskij.tradepoint.application.port.out.product.SaveProductPricePort;
 import pl.dziewulskij.tradepoint.domain.product.ProductPrice;
 import pl.dziewulskij.tradepoint.domain.shared.BusinessId;
+import pl.dziewulskij.tradepoint.infrastructure.annotations.OutputAdapter;
 
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
+@OutputAdapter
 @Repository
 @RequiredArgsConstructor
-public class ProductPriceRepositoryAdapter implements LoadProductPricePort, SaveProductPricePort, DeleteProductPricePort {
+public class ProductPriceRepositoryAdapter implements
+        LoadProductPricePort,
+        SaveProductPricePort,
+        DeleteProductPricePort,
+        ProductPriceExistencePort {
 
     private final ProductPriceJpaRepository productPriceJpaRepository;
 
@@ -34,7 +41,12 @@ public class ProductPriceRepositoryAdapter implements LoadProductPricePort, Save
     }
 
     @Override
-    public void deleteByBusinessId(BusinessId productPriceId) {
+    public void deleteById(BusinessId productPriceId) {
         productPriceJpaRepository.deleteByBusinessId(productPriceId);
+    }
+
+    @Override
+    public boolean existsByIdAndUserId(BusinessId priceId, BusinessId userId) {
+        return productPriceJpaRepository.existsByBusinessIdAndProductUserBusinessId(priceId, userId);
     }
 }

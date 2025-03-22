@@ -41,4 +41,6 @@ public interface TransactionJpaRepository extends JpaRepository<Transaction, Lon
             where u.businessId = :userId
             """)
     List<TransactionOverviewInfo> findTransactionOverviewInfoByUserId(BusinessId userId);
+
+    long deleteByBusinessId(BusinessId businessId);
 }

@@ -5,10 +5,12 @@ import org.springframework.stereotype.Repository;
 import pl.dziewulskij.tradepoint.application.port.out.password.PasswordResetPort;
 import pl.dziewulskij.tradepoint.domain.password.PasswordReset;
 import pl.dziewulskij.tradepoint.domain.shared.Email;
+import pl.dziewulskij.tradepoint.infrastructure.annotations.OutputAdapter;
 
 import java.util.Optional;
 import java.util.UUID;
 
+@OutputAdapter
 @Repository
 @RequiredArgsConstructor
 public class PasswordResetRepositoryAdapter implements PasswordResetPort {

@@ -60,4 +60,10 @@ public class TransactionController {
         List<GetTransactionOverviewResult> transactionResult = transactionQueryUseCase.getAll();
         return transactionApiMapper.toResponseList(transactionResult);
     }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void delete(@PathVariable UUID id) {
+        transactionCommandUseCase.delete(BusinessId.of(id));
+    }
 }

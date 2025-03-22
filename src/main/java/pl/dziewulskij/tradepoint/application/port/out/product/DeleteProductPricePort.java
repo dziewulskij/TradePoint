@@ -6,6 +6,6 @@ import pl.dziewulskij.tradepoint.infrastructure.annotations.OutputPort;
 @OutputPort
 public interface DeleteProductPricePort {
 
-    void deleteByBusinessId(BusinessId productPriceId);
+    void deleteById(BusinessId productPriceId);
 
 }

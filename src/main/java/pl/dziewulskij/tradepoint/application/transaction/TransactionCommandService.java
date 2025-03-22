@@ -3,13 +3,13 @@ package pl.dziewulskij.tradepoint.application.transaction;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import pl.dziewulskij.tradepoint.application.customer.validator.CustomerBelongToUserValidator;
 import pl.dziewulskij.tradepoint.application.port.in.transaction.command.TransactionCommand;
 import pl.dziewulskij.tradepoint.application.port.in.transaction.command.TransactionCommandUseCase;
 import pl.dziewulskij.tradepoint.application.port.in.transaction.command.TransactionResult;
+import pl.dziewulskij.tradepoint.application.port.out.transaction.DeleteTransactionPort;
 import pl.dziewulskij.tradepoint.application.port.out.transaction.SaveTransactionPort;
-import pl.dziewulskij.tradepoint.application.product.validator.ProductBelongToUserValidator;
 import pl.dziewulskij.tradepoint.application.transaction.mapper.TransactionMapper;
+import pl.dziewulskij.tradepoint.application.transaction.validator.TransactionCommandValidatorFacade;
 import pl.dziewulskij.tradepoint.domain.customer.Customer;
 import pl.dziewulskij.tradepoint.domain.product.Product;
 import pl.dziewulskij.tradepoint.domain.shared.BusinessId;
@@ -22,16 +22,16 @@ import pl.dziewulskij.tradepoint.domain.user.User;
 public class TransactionCommandService implements TransactionCommandUseCase {
 
     private final SaveTransactionPort saveTransactionPort;
+    private final DeleteTransactionPort deleteTransactionPort;
     private final TransactionMapper transactionMapper;
     private final TransactionFactory transactionFactory;
     private final TransactionCommandProviderFacade commandProviderFacade;
-    private final CustomerBelongToUserValidator customerBelongToUserValidator;
-    private final ProductBelongToUserValidator productBelongToUserValidator;
+    private final TransactionCommandValidatorFacade commandValidatorFacade;
 
     @Override
     @Transactional
     public TransactionResult create(TransactionCommand command) {
-        belongToUserValidator(command);
+        commandValidatorFacade.validateForCreationOrUpdate(command);
 
         User user = commandProviderFacade.currentUser();
         Customer customer = commandProviderFacade.customerByBusinessId(command.customerId());
@@ -43,8 +43,9 @@ public class TransactionCommandService implements TransactionCommandUseCase {
     }
 
     @Override
+    @Transactional
     public TransactionResult update(BusinessId transactionId, TransactionCommand command) {
-        belongToUserValidator(command);
+        commandValidatorFacade.validateForCreationOrUpdate(command);
 
         Transaction transaction = commandProviderFacade.transactionByBusinessId(transactionId);
         Customer customer = commandProviderFacade.customerByBusinessId(command.customerId());
@@ -55,8 +56,11 @@ public class TransactionCommandService implements TransactionCommandUseCase {
         return transactionMapper.toResult(transaction);
     }
 
-    private void belongToUserValidator(TransactionCommand command) {
-        customerBelongToUserValidator.validate(command.customerId());
-        productBelongToUserValidator.validate(command.productId());
+    @Override
+    @Transactional
+    public void delete(BusinessId transactionId) {
+        commandValidatorFacade.validateForDeletion(transactionId);
+        deleteTransactionPort.deleteById(transactionId);
     }
+
 }
