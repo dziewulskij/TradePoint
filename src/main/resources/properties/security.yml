@@ -48,6 +48,7 @@ app:
           - Content-Type
           - Accept
           - Authorization
+          - X-PASSWORD-RESET-TOKEN
         methods:
           - GET
           - POST

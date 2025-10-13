@@ -39,6 +39,7 @@ public interface TransactionJpaRepository extends JpaRepository<Transaction, Lon
             join t.customer c
             join t.user u
             where u.businessId = :userId
+            order by t.transactionDate desc, t.id desc
             """)
     List<TransactionOverviewInfo> findTransactionOverviewInfoByUserId(BusinessId userId);
 

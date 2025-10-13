@@ -22,7 +22,7 @@ public class ProductQueryService implements ProductQueryUseCase {
     public List<GetProductResult> getAll() {
         BusinessId currentUserId = AuthenticationUtils.getCurrentUserId();
 
-        return loadProductPort.findAllByUserId(currentUserId).stream()
+        return loadProductPort.findAllWithNewestPriceByUserId(currentUserId).stream()
                 .map(productMapper::toGetProductResult)
                 .toList();
     }

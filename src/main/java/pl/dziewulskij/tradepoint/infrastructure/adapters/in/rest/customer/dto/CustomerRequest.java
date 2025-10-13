@@ -2,7 +2,6 @@ package pl.dziewulskij.tradepoint.infrastructure.adapters.in.rest.customer.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import org.hibernate.validator.constraints.pl.NIP;
@@ -43,7 +42,6 @@ public record CustomerRequest(
         String notes,
 
         @JsonProperty("companyName")
-        @NotBlank
         String companyName,
 
         @JsonProperty("companyShortName")

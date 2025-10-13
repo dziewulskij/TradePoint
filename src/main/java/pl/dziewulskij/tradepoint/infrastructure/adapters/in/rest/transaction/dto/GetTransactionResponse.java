@@ -6,6 +6,7 @@ import pl.dziewulskij.tradepoint.domain.transaction.PaymentType;
 import pl.dziewulskij.tradepoint.domain.transaction.TransactionType;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 public record GetTransactionResponse(
@@ -16,6 +17,7 @@ public record GetTransactionResponse(
         @JsonProperty("quantity") BigDecimal quantity,
         @JsonProperty("price") BigDecimal price,
         @JsonProperty("total") BigDecimal total,
+        @JsonProperty("transactionDate") LocalDateTime transactionDate,
         @JsonProperty("customer") GetTransactionCustomerResponse customer,
         @JsonProperty("product") GetTransactionProductResponse product
 ) {

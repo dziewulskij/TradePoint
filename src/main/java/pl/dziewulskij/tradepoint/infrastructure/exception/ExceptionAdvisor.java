@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 public class ExceptionAdvisor {
 
     @ExceptionHandler(TradePointException.class)
-    public ResponseEntity<ErrorDetails> handleAgricuraException(TradePointException exception) {
+    public ResponseEntity<ErrorDetails> handleTradePointException(TradePointException exception) {
         var errorDetails = ErrorDetails.of(exception.getErrorCode());
         return ResponseEntity
                 .status(errorDetails.status())
