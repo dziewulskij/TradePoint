@@ -4,10 +4,12 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 import pl.dziewulskij.tradepoint.application.port.out.product.*;
 import pl.dziewulskij.tradepoint.domain.product.Product;
+import pl.dziewulskij.tradepoint.domain.product.ProductInfo;
 import pl.dziewulskij.tradepoint.domain.shared.BusinessId;
 import pl.dziewulskij.tradepoint.infrastructure.adapters.out.persistence.transaction.TransactionJpaRepository;
 import pl.dziewulskij.tradepoint.infrastructure.annotations.OutputAdapter;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,8 +32,8 @@ public class ProductRepositoryAdapter implements
     }
 
     @Override
-    public List<Product> findAllByUserId(BusinessId userId) {
-        return productJpaRepository.findByUserBusinessId(userId);
+    public List<ProductInfo> findAllWithNewestPriceByUserId(BusinessId userId) {
+        return productJpaRepository.findAllWithNewestPriceByUserBusinessId(userId.getValue(), LocalDate.now());
     }
 
     @Override

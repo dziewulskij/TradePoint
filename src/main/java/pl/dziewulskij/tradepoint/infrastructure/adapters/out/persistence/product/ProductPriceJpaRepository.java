@@ -11,7 +11,7 @@ import java.util.Optional;
 
 public interface ProductPriceJpaRepository extends JpaRepository<ProductPrice, Long> {
 
-    List<ProductPrice> findByProductBusinessId(BusinessId productId);
+    List<ProductPrice> findByProductBusinessIdOrderByValidFromDescIdDesc(BusinessId businessId);
 
     @Query("""
             select pp from ProductPrice pp
@@ -19,10 +19,9 @@ public interface ProductPriceJpaRepository extends JpaRepository<ProductPrice, L
                 order by pp.validFrom desc, pp.id desc
                 limit 1
             """)
-        // findNewest
     Optional<ProductPrice> findNewestByProductBusinessIdAndData(BusinessId productId, LocalDate untilDate);
 
-    long deleteByBusinessId(BusinessId businessId);
+    void deleteByBusinessId(BusinessId businessId);
 
     boolean existsByBusinessIdAndProductUserBusinessId(BusinessId businessId, BusinessId businessId1);
 }

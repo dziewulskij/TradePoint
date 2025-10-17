@@ -32,7 +32,7 @@ public class ProductPriceRepositoryAdapter implements
 
     @Override
     public List<ProductPrice> findAllByProductId(BusinessId productId) {
-        return productPriceJpaRepository.findByProductBusinessId(productId);
+        return productPriceJpaRepository.findByProductBusinessIdOrderByValidFromDescIdDesc(productId);
     }
 
     @Override
