@@ -8,39 +8,28 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 import pl.dziewulskij.tradepoint.application.port.out.mail.MailSender;
 import pl.dziewulskij.tradepoint.domain.shared.Email;
-import pl.dziewulskij.tradepoint.infrastructure.mail.EmailTemplateConfig;
-import pl.dziewulskij.tradepoint.infrastructure.mail.EmailTemplateLoader;
+import pl.dziewulskij.tradepoint.infrastructure.adapters.out.mail.factory.MailMessage;
+import pl.dziewulskij.tradepoint.infrastructure.adapters.out.mail.factory.MailMessageFactory;
 import pl.dziewulskij.tradepoint.infrastructure.mail.EmailType;
 
+import java.util.Collections;
 import java.util.Map;
-import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
 public class MailSenderService implements MailSender {
 
     private final JavaMailSender javaMailSender;
-    private final EmailTemplateConfig emailTemplateConfig;
+    private final MailMessageFactory mailMessageFactory;
 
     public void send(EmailType emailType, Email recipient) {
-        EmailTemplateConfig.EmailTemplateData emailTemplateData = getTemplate(emailType);
-        String content = EmailTemplateLoader.load(emailTemplateData.getPath());
-        sendMail(emailTemplateData.getSubject(), recipient.value(), content);
+        MailMessage mailMessage = mailMessageFactory.create(emailType);
+        sendMail(mailMessage.getSubject(), recipient.value(), mailMessage.getContent(Collections.emptyMap()));
     }
 
     public void send(EmailType emailType, Email recipient, Map<String, String> params) {
-        EmailTemplateConfig.EmailTemplateData emailTemplateData = getTemplate(emailType);
-        String template = EmailTemplateLoader.load(emailTemplateData.getPath());
-        String finalContent = MailTemplateParamReplacer.replace(template, params);
-        sendMail(emailTemplateData.getSubject(), recipient.value(), finalContent);
-    }
-
-    private EmailTemplateConfig.EmailTemplateData getTemplate(EmailType emailType) {
-        EmailTemplateConfig.EmailTemplateData emailTemplateData = emailTemplateConfig.getTemplates().get(emailType);
-        if (Objects.isNull(emailTemplateData)) {
-            throw new EmailTemplateDataNotFoundException(emailType);
-        }
-        return emailTemplateData;
+        MailMessage mailMessage = mailMessageFactory.create(emailType);
+        sendMail(mailMessage.getSubject(), recipient.value(), mailMessage.getContent(params));
     }
 
     private void sendMail(String subject, String recipient, String htmlContent) {
