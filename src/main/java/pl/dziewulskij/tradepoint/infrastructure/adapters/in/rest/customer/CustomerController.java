@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import pl.dziewulskij.tradepoint.application.customer.service.CustomerCommandServiceDelegate;
+import pl.dziewulskij.tradepoint.application.customer.service.PrintCustomerReportUseCase;
 import pl.dziewulskij.tradepoint.application.port.in.customer.command.CommandCustomerResult;
 import pl.dziewulskij.tradepoint.application.port.in.customer.command.CustomerCommand;
 import pl.dziewulskij.tradepoint.application.port.in.customer.query.CustomerQueryUseCase;
@@ -26,6 +27,7 @@ public class CustomerController {
 
     private final CustomerCommandServiceDelegate customerCommandUseCase;
     private final CustomerQueryUseCase customerQueryUseCase;
+    private final PrintCustomerReportUseCase printCustomerReportUseCase;
     private final CustomerRestMapper customerRestMapper;
 
     @PostMapping
@@ -51,6 +53,12 @@ public class CustomerController {
     public List<GetCustomerResponse> getAll() {
         List<GetCustomerResult> getCustomerResults = customerQueryUseCase.getAll();
         return customerRestMapper.toResponseList(getCustomerResults);
+    }
+
+    @GetMapping("/reports")
+    @ResponseStatus(HttpStatus.OK)
+    public void printReports() {
+        printCustomerReportUseCase.report();
     }
 
 
