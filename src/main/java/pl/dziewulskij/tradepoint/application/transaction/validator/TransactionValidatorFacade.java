@@ -9,12 +9,12 @@ import pl.dziewulskij.tradepoint.domain.shared.BusinessId;
 
 @Component
 @RequiredArgsConstructor
-public class TransactionCommandValidatorFacade {
+public class TransactionValidatorFacade {
 
-    private final CustomerBelongToUserValidator customerBelongToUserValidator;
     private final ProductBelongToUserValidator productBelongToUserValidator;
-    private final TransactionBelongToUserValidator transactionBelongToUserValidator;
+    private final CustomerBelongToUserValidator customerBelongToUserValidator;
     private final TransactionDeletionValidator transactionDeletionValidator;
+    private final TransactionBelongToUserValidator transactionBelongToUserValidator;
 
     public void validateForCreationOrUpdate(TransactionCommand command) {
         customerBelongToUserValidator.validate(command.customerId());
@@ -25,5 +25,4 @@ public class TransactionCommandValidatorFacade {
         transactionBelongToUserValidator.validate(transactionId);
         transactionDeletionValidator.validate(transactionId);
     }
-
 }

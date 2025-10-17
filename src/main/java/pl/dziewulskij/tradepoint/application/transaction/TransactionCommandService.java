@@ -9,7 +9,7 @@ import pl.dziewulskij.tradepoint.application.port.in.transaction.command.Transac
 import pl.dziewulskij.tradepoint.application.port.out.transaction.DeleteTransactionPort;
 import pl.dziewulskij.tradepoint.application.port.out.transaction.SaveTransactionPort;
 import pl.dziewulskij.tradepoint.application.transaction.mapper.TransactionMapper;
-import pl.dziewulskij.tradepoint.application.transaction.validator.TransactionCommandValidatorFacade;
+import pl.dziewulskij.tradepoint.application.transaction.validator.TransactionValidatorFacade;
 import pl.dziewulskij.tradepoint.domain.customer.Customer;
 import pl.dziewulskij.tradepoint.domain.product.Product;
 import pl.dziewulskij.tradepoint.domain.shared.BusinessId;
@@ -26,7 +26,7 @@ public class TransactionCommandService implements TransactionCommandUseCase {
     private final TransactionMapper transactionMapper;
     private final TransactionFactory transactionFactory;
     private final TransactionCommandProviderFacade commandProviderFacade;
-    private final TransactionCommandValidatorFacade commandValidatorFacade;
+    private final TransactionValidatorFacade commandValidatorFacade;
 
     @Override
     @Transactional
