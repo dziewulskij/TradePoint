@@ -1,6 +1,7 @@
 package pl.dziewulskij.tradepoint.infrastructure.adapters.out.persistence.user;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
 import pl.dziewulskij.tradepoint.application.port.out.user.ExistsUserPort;
 import pl.dziewulskij.tradepoint.application.port.out.user.LoadUserPort;
@@ -12,10 +13,11 @@ import pl.dziewulskij.tradepoint.infrastructure.annotations.OutputAdapter;
 
 import java.util.Optional;
 
+@Primary
 @OutputAdapter
-@Repository
+@Repository("userPostgresRepositoryAdapter")
 @RequiredArgsConstructor
-public class ExistsUserRepositoryAdapter implements LoadUserPort, SaveUserPort, ExistsUserPort {
+public class UserPostgresRepositoryAdapter implements LoadUserPort, SaveUserPort, ExistsUserPort {
 
     private final UserJpaRepository userJpaRepository;
 
