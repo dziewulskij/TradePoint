@@ -1,4 +1,4 @@
-package pl.dziewulskij.tradepoint.infrastructure.adapters.out.mail.factory;
+package pl.dziewulskij.tradepoint.infrastructure.adapters.out.mail.message;
 
 import pl.dziewulskij.tradepoint.infrastructure.mail.EmailType;
 

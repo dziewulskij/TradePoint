@@ -1,8 +1,9 @@
-package pl.dziewulskij.tradepoint.infrastructure.adapters.out.mail.factory;
+package pl.dziewulskij.tradepoint.infrastructure.adapters.out.mail.message.factory;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import pl.dziewulskij.tradepoint.infrastructure.adapters.out.mail.EmailTemplateDataNotFoundException;
+import pl.dziewulskij.tradepoint.infrastructure.adapters.out.mail.message.MailMessage;
 import pl.dziewulskij.tradepoint.infrastructure.mail.EmailTemplateConfig;
 import pl.dziewulskij.tradepoint.infrastructure.mail.EmailType;
 
