@@ -10,9 +10,11 @@ import pl.dziewulskij.tradepoint.application.transaction.mapper.TransactionMappe
 import pl.dziewulskij.tradepoint.application.transaction.validator.TransactionBelongToUserValidator;
 import pl.dziewulskij.tradepoint.domain.shared.BusinessId;
 import pl.dziewulskij.tradepoint.domain.transaction.Transaction;
+import pl.dziewulskij.tradepoint.domain.transaction.info.PaidTransactionOverviewCollection;
 import pl.dziewulskij.tradepoint.domain.transaction.info.TransactionOverviewInfo;
 import pl.dziewulskij.tradepoint.infrastructure.security.util.AuthenticationUtils;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Service
@@ -36,6 +38,17 @@ public class TransactionQueryService implements TransactionQueryUseCase {
         BusinessId currentUserId = AuthenticationUtils.getCurrentUserId();
         List<TransactionOverviewInfo> transactions = loadOverviewTransactionPort.findAll(currentUserId);
         return transactionMapper.map(transactions);
+    }
+
+    @Override
+    public BigDecimal getSumPaidTransactions() {
+        BigDecimal sum = BigDecimal.ZERO;
+        BusinessId currentUserId = AuthenticationUtils.getCurrentUserId();
+        List<TransactionOverviewInfo> transactions = loadOverviewTransactionPort.findAll(currentUserId);
+        for (TransactionOverviewInfo tx : new PaidTransactionOverviewCollection(transactions)) {
+            sum = sum.add(tx.getTotal().total());
+        }
+        return sum;
     }
 
 }
