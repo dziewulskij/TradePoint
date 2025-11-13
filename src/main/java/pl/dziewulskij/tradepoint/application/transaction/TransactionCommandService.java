@@ -27,6 +27,7 @@ public class TransactionCommandService implements TransactionCommandUseCase {
     private final TransactionFactory transactionFactory;
     private final TransactionCommandProviderFacade commandProviderFacade;
     private final TransactionValidatorFacade commandValidatorFacade;
+    private final TransactionUndoManager transactionUndoManager;
 
     @Override
     @Transactional
@@ -52,6 +53,7 @@ public class TransactionCommandService implements TransactionCommandUseCase {
         Product product = commandProviderFacade.productByBusinessId(command.productId());
         transaction.update(command, customer, product);
 
+        transactionUndoManager.saveState(transaction);
         saveTransactionPort.save(transaction);
         return transactionMapper.toResult(transaction);
     }
@@ -61,6 +63,14 @@ public class TransactionCommandService implements TransactionCommandUseCase {
     public void delete(BusinessId transactionId) {
         commandValidatorFacade.validateForDeletion(transactionId);
         deleteTransactionPort.deleteById(transactionId);
+    }
+
+    @Override
+    @Transactional
+    public void undoLastChange(BusinessId transactionId) {
+        Transaction transaction = commandProviderFacade.transactionByBusinessId(transactionId);
+        transactionUndoManager.undo(transaction);
+        saveTransactionPort.save(transaction);
     }
 
 }

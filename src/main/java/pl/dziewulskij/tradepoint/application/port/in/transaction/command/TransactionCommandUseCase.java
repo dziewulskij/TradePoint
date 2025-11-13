@@ -12,4 +12,6 @@ public interface TransactionCommandUseCase {
 
     void delete(BusinessId transactionId);
 
+    void undoLastChange(BusinessId transactionId);
+
 }

@@ -89,4 +89,37 @@ public class Transaction extends TimeAuditable {
     public boolean isNotPaid() {
         return paymentStatus == PaymentStatus.NOT_PAID;
     }
+
+    public TransactionMemento saveToMemento() {
+        return new TransactionMemento(
+                transactionType,
+                transactionDate,
+                paymentType,
+                paymentStatus,
+                total,
+                customer,
+                product
+        );
+    }
+
+    public void restoreFromMemento(TransactionMemento memento) {
+        this.transactionType = memento.transactionType();
+        this.transactionDate = memento.transactionDate();
+        this.paymentType = memento.paymentType();
+        this.paymentStatus = memento.paymentStatus();
+        this.total = memento.total();
+        this.customer = memento.customer();
+        this.product = memento.product();
+    }
+
+    public record TransactionMemento(
+            TransactionType transactionType,
+            LocalDateTime transactionDate,
+            PaymentType paymentType,
+            PaymentStatus paymentStatus,
+            TransactionTotal total,
+            Customer customer,
+            Product product
+    ) {
+    }
 }
