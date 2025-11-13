@@ -10,5 +10,4 @@ public interface LoadTransactionPort {
     Optional<Transaction> findByBusinessId(BusinessId transactionId);
 
     Optional<Transaction> findByBusinessIdFetchProductAndCustomer(BusinessId transactionId);
-
 }

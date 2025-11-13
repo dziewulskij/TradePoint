@@ -59,4 +59,7 @@ public class Customer extends TimeAuditable {
     @OneToMany(mappedBy = "customer")
     Set<Transaction> transactions = new HashSet<>();
 
+    public <R> R accept(CustomerVisitor<R> visitor) {
+        return visitor.visit(this);
+    }
 }
