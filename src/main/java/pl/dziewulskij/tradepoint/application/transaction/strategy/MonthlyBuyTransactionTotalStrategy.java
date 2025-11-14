@@ -1,5 +1,6 @@
 package pl.dziewulskij.tradepoint.application.transaction.strategy;
 
+import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.stereotype.Component;
 import pl.dziewulskij.tradepoint.domain.shared.TransactionTotal;
 import pl.dziewulskij.tradepoint.domain.transaction.Transaction;
@@ -16,7 +17,8 @@ public class MonthlyBuyTransactionTotalStrategy implements TransactionTotalStrat
 
     @Override
     public BigDecimal calculateTotal(List<Transaction> transactions) {
-        return transactions.stream()
+        return CollectionUtils.emptyIfNull(transactions)
+                .stream()
                 .filter(tx -> tx.getTransactionType() == TransactionType.BUY)
                 .filter(tx -> tx.getTransactionDate().isAfter(getMonthAgo()))
                 .map(Transaction::getTotal)

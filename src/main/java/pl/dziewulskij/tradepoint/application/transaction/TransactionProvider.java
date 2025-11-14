@@ -7,6 +7,8 @@ import pl.dziewulskij.tradepoint.domain.exception.TransactionNotFoundException;
 import pl.dziewulskij.tradepoint.domain.shared.BusinessId;
 import pl.dziewulskij.tradepoint.domain.transaction.Transaction;
 
+import java.util.List;
+
 @Component
 @RequiredArgsConstructor
 public class TransactionProvider {
@@ -21,6 +23,10 @@ public class TransactionProvider {
     public Transaction byBusinessIdFetchProductAndCustomer(BusinessId transactionId) {
         return loadTransactionPort.findByBusinessIdFetchProductAndCustomer(transactionId)
                 .orElseThrow(TransactionNotFoundException::new);
+    }
+
+    public List<Transaction> allByCustomerId(BusinessId customerId) {
+        return List.of();
     }
 
 }
