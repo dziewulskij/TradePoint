@@ -8,6 +8,8 @@ import java.util.List;
 
 public interface TransactionTotalStrategy {
 
+    long ONE = 1;
+
     BigDecimal calculateTotal(List<Transaction> transactions);
 
     TransactionTotalType getSupportedType();

@@ -33,7 +33,7 @@ public class MonthlySellTransactionTotalStrategy implements TransactionTotalStra
 
     private LocalDateTime getMonthAgo() {
         return LocalDate.now()
-                .minusMonths(1)
+                .minusMonths(ONE)
                 .atStartOfDay();
     }
 }

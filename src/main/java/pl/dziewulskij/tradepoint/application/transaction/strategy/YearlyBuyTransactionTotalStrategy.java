@@ -33,7 +33,7 @@ public class YearlyBuyTransactionTotalStrategy implements TransactionTotalStrate
 
     private LocalDateTime getYearAgo() {
         return LocalDate.now()
-                .minusYears(1)
+                .minusYears(ONE)
                 .atStartOfDay();
     }
 }
